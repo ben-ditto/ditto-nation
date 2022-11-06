@@ -17,5 +17,5 @@ export const ADMIN_URL = `https://${STORE_DOMAIN}/admin/api/2022-07/graphql.json
 
 export const ADMIN_TOKEN = process.env.NEXT_PUBLIC_SHOPIFY_ADMIN_ACCESS_TOKEN;
 
-export const CART_QUERY = "CART_QUERY";
-export const CART_ITEM_COUNT_QUERY = "CART_ITEM_COUNT_QUERY";
+export const PATREON_TOKEN = `Bearer ${process.env.NEXT_PUBLIC_PATREON_CLIENT_SECRET}`;
+export const PATREON_CLIENT = process.env.NEXT_PUBLIC_PATREON_CLIENT_ID;

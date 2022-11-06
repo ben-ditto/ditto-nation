@@ -25,8 +25,6 @@ import { shopifyGraphqlRequestClient } from "src/lib/clients/graphqlRequestClien
 import s from "./CartItem.module.css";
 import clsx from "clsx";
 
-import { CART_QUERY, CART_ITEM_COUNT_QUERY } from "lib/const";
-
 //Component
 import { Cross } from "components/Icons";
 import Adder from "components/UI/Adder";

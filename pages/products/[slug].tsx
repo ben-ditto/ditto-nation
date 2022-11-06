@@ -1,26 +1,17 @@
 import React from "react";
 import { useRouter } from "next/router";
-import type {
-  GetStaticPathsContext,
-  GetStaticPropsContext,
-  InferGetStaticPropsType,
-  NextPageContext,
-} from "next";
-import Image from "next/image";
-
-import nookies from "nookies";
+import type { GetStaticPropsContext, NextPageContext } from "next";
 
 import { gql } from "graphql-request";
-import { GraphQLResponse } from "graphql-request/dist/types";
 import { shopifyGraphqlRequestClient } from "src/lib/clients/graphqlRequestClient";
-// Import Swiper React components
+
 import { NextSeo } from "next-seo";
 
 import { dehydrate, QueryClient, useQueryClient } from "@tanstack/react-query";
 
 import { useAddItem } from "lib/shopify/CartHooks";
 import { getLayout } from "components/Layout/Layout";
-import Adder from "components/UI/Adder";
+import Loader from "components/UI/Loader";
 
 import {
   GetProductBySlugQuery,
@@ -46,7 +37,7 @@ const ProductPage = (context?: NextPageContext) => {
 
   const product = data?.productByHandle;
 
-  if (isLoadingProduct) return <p>Loading Product...</p>;
+  if (isLoadingProduct) return <Loader />;
   if (productError) return <p>{productError.message}</p>;
 
   if (!product) router.replace("/");
@@ -111,11 +102,6 @@ export const getStaticProps = async ({
     useGetShopInfoQuery.getKey(),
     useGetShopInfoQuery.fetcher(shopifyGraphqlRequestClient)
   );
-
-  // await queryClient.prefetchQuery(
-  //   useGetNavItemsQuery.getKey(),
-  //   useGetNavItemsQuery.fetcher(shopifyGraphqlRequestClient)
-  // );
 
   return {
     props: {

@@ -13,8 +13,14 @@ export default function Home() {
   return (
     <>
       <NextSeo title="Home" />
-      <div className="fixed overflow-hidden top-0 left-0 h-screen !w-screen">
-        <Image src={"/giphy.gif"} alt="homepage" layout="fill"></Image>
+      <div className="fixed overflow-hidden top-0 left-0 !h-screen !w-screen bg-[url('https://cdn.shopify.com/s/files/1/0521/9357/files/test-ditto-skinhead.jpg?v=1613569482')] bg-center">
+        {/* <Image
+          src={
+            "https://cdn.shopify.com/s/files/1/0521/9357/files/test-ditto-skinhead.jpg?v=1613569482"
+          }
+          alt="homepage"
+          layout="fill"
+        ></Image> */}
       </div>
     </>
   );

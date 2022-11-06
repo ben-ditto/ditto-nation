@@ -1,5 +1,6 @@
 import React from "react";
 import { NextSeo } from "next-seo";
+import Link from "next/link";
 
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 
@@ -22,6 +23,19 @@ const About = () => {
           plassert på et taggete fjell av blod og tårer. Navnet hans er Ben
           Ditto.
         </p>
+      </section>
+
+      <section className="px-4 mt-8 max-w-8xl">
+        <ul className="flex gap-4 font-black ">
+          <li className=" hover:text-pink transition-all duration-150 ease-linear">
+            <Link href="/shipping">
+              <a>Shipping</a>
+            </Link>
+          </li>
+          <li className="hover:text-pink transition-all duration-150 ease-linear">
+            Legal
+          </li>
+        </ul>
       </section>
     </>
   );

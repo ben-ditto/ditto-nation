@@ -52,6 +52,10 @@ const ProductSingle: React.FC<IProps> = ({ product, context }) => {
         _context: unknown
       ) => {
         queryClient.invalidateQueries(useCreateCartMutation.getKey());
+        queryClient.invalidateQueries(useAddCartItemMutation.getKey());
+        queryClient.invalidateQueries(
+          useGetCartItemCountQuery.getKey({ checkoutId: null })
+        );
       },
       onError: () => {
         console.log(error);
@@ -80,8 +84,7 @@ const ProductSingle: React.FC<IProps> = ({ product, context }) => {
         queryClient.invalidateQueries(
           useGetCartItemCountQuery.getKey({ checkoutId: checkoutId })
         );
-        console.log("product mutation data", data);
-        // setResponse(data);
+        // console.log("product mutation data", data);
       },
       onError: () => {
         console.error(error);
