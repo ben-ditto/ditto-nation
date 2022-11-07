@@ -7,18 +7,41 @@ import { dehydrate, QueryClient } from "@tanstack/react-query";
 
 import { getLayout } from "components/Layout/Layout";
 
-import { useGetShopInfoQuery } from "src/generated/graphql";
+import { useGetShopInfoQuery, GetShopInfoQuery } from "src/generated/graphql";
 
 export default function Home() {
+  const { isLoading, error, data } = useGetShopInfoQuery<
+    GetShopInfoQuery,
+    Error
+  >(shopifyGraphqlRequestClient);
+
+  console.log(data);
+
+  const imageUrl = data?.shop?.brand?.coverImage?.image?.url;
+  console.log(imageUrl.toString());
+
   return (
     <>
       <NextSeo title="Home" />
-      <div className="fixed overflow-hidden top-0 left-0 !h-screen !w-screen bg-[url('https://cdn.shopify.com/s/files/1/0521/9357/files/test-ditto-skinhead.jpg?v=1613569482')] bg-center">
+      <div
+        style={{
+          backgroundImage:
+            `url("${data?.shop?.brand?.coverImage?.image?.url}")` ??
+            `url("https://cdn.shopify.com/s/files/1/0521/9357/files/test-ditto-skinhead.jpg?v=1613569482")`,
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+        }}
+        className={`fixed overflow-hidden top-0 left-0 !h-screen !w-screen bg-center`}
+      >
         {/* <Image
           src={
+            data?.shop?.brand?.coverImage?.image?.url ??
             "https://cdn.shopify.com/s/files/1/0521/9357/files/test-ditto-skinhead.jpg?v=1613569482"
           }
           alt="homepage"
+          width={"100%"}
+          height={"100%"}
           layout="fill"
         ></Image> */}
       </div>
@@ -38,7 +61,7 @@ export const getStaticProps = async () => {
 
   return {
     props: {
-      dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
+      dehydratedState: dehydrate(queryClient),
     },
     revalidate: 180, // In seconds
   };

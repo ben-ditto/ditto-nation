@@ -1,5 +1,7 @@
 query GetShopInfo {
   shop {
+    id
+    moneyFormat
     name
     description
     shippingPolicy {
@@ -12,6 +14,22 @@ query GetShopInfo {
     }
     primaryDomain {
       url
+    }
+    brand {
+      colors {
+        primary {
+          background
+        }
+        secondary {
+          background
+        }
+      }
+      coverImage {
+        id
+        image {
+          url
+        }
+      }
     }
   }
 }
