@@ -1,6 +1,6 @@
 {
   "title": "Ditto Nation",
-  "titleTemplate": "| Ditto Nation",
+  "titleTemplate": "%s | Ditto Nation",
   "description": "Ditto Nation - https://www.ditto-nation.com",
   "openGraph": {
     "title": "Ditto Nation",
