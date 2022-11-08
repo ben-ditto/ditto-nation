@@ -15,15 +15,15 @@ const Footer = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const result = await axios("http://api.open-notify.org/astros.json");
+        const result = await axios(TESTAPI);
 
         console.log(result.data.people);
         let tempArr = result.data.people.map((obj) => {
           return `${obj.name}: ${obj.craft}`;
         });
         setList(tempArr);
-      } catch {
-        console.log("eror");
+      } catch (e) {
+        console.log("eror", e);
       }
     };
 
