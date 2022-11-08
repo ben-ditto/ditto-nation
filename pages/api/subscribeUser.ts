@@ -1,6 +1,7 @@
 import { gql, GraphQLClient } from "graphql-request";
+import { NextApiRequest, NextApiResponse } from "next";
 
-const submitter = async (req, res) => {
+const submitter = async (req: NextApiRequest, res: NextApiResponse) => {
   const { email } = req.body;
 
   console.log(email);

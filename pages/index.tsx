@@ -22,6 +22,23 @@ export default function Home() {
 
   return (
     <>
+      <NextSeo
+        title={data?.shop?.name ?? "Home"}
+        description={data?.shop?.description ?? "Ditto Nation Homepage"}
+        openGraph={{
+          type: "website",
+          title: data?.shop?.name ?? "Home",
+          description: data?.shop?.description ?? "Ditto Nation Homepage",
+          images: [
+            {
+              url: data?.shop?.brand?.coverImage?.image?.url || null,
+              width: 800,
+              height: 600,
+              alt: "Homepage Cover Image",
+            },
+          ],
+        }}
+      />
       <NextSeo title="Home" />
       <div
         style={{
