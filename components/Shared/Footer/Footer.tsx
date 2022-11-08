@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from "react";
-import axios from "axios";
 import socketIOClient from "socket.io-client";
 
 //Components
@@ -15,10 +14,11 @@ const Footer = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const result = await axios(TESTAPI);
+        const blob = await fetch(TESTAPI);
+        const result = await blob.json();
 
-        console.log(result.data.people);
-        let tempArr = result.data.people.map((obj) => {
+        console.log(result);
+        let tempArr = result.people.map((obj) => {
           return `${obj.name}: ${obj.craft}`;
         });
         setList(tempArr);
