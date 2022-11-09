@@ -1,5 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
 import socketIOClient from "socket.io-client";
+import axios from "axios";
+
+//Fetch Patreon
+import { useQuery, dehydrate, QueryClient } from "@tanstack/react-query";
+import { patreonRequestClient } from "src/lib/clients/axiosClient";
 
 //Components
 import Marquee from "react-fast-marquee";
@@ -9,27 +14,11 @@ const ENDPOINT = "http://127.0.0.1:4001";
 const TESTAPI = "http://api.open-notify.org/astros.json";
 
 const Footer = () => {
+  const { isLoading, error, data, isFetching } = useQuery(["astro"], () =>
+    axios.get(TESTAPI).then((res) => res.data)
+  );
+
   const [list, setList] = useState([]);
-
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const blob = await fetch(TESTAPI);
-        const result = await blob.json();
-
-        console.log(result);
-        let tempArr = result.people.map((obj) => {
-          return `${obj.name}: ${obj.craft}`;
-        });
-        setList(tempArr);
-      } catch (e) {
-        console.log("eror", e);
-      }
-    };
-
-    getData();
-  }, []);
-
   // useEffect(() => {
   //   const socket = socketIOClient(ENDPOINT);
 
@@ -69,9 +58,10 @@ const Footer = () => {
         gradient={false}
         className="p-4 uppercase font-bold !min-w-[70%]"
       >
-        {list.map((el, idx) => (
-          <span key={idx}>{el + " - "}</span>
-        ))}
+        {data &&
+          data.people.map((el, idx) => (
+            <span key={idx}>{el.name + " - "}</span>
+          ))}
       </Marquee>
     </footer>
   );
