@@ -31,7 +31,7 @@ const Layout: React.FC<IProps> = ({ main }) => {
           displayMenu
             ? "top-[181px] min-h-[calc(100%-253px)]"
             : "top-[118px] min-h-[calc(100%-190px)]",
-          "relative py-4 px-4 pb-20 md:px-6 xl:px-8 lg:py-8 lg:pb-16 lg:mb-0 lg:min-h-[calc(100vh-214px)] transition-all duration-300 ease-in-out"
+          "lg:top-[118px] lg:min-h-[calc(100%-214px)] relative py-4 px-4 pb-20 md:px-6 xl:px-8 lg:py-8 lg:pb-16 lg:mt-6 lg:mb-0 transition-all duration-300 ease-in-out"
         )}
       >
         {main}

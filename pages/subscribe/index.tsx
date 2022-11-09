@@ -29,7 +29,7 @@ const SubscribePage = ({ data }) => {
   return (
     <>
       <NextSeo title="Subscribe" description="Patreon Subscribtions" />
-      <div className="grid-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 mx-auto px-2 lg:px-0  max-w-8xl">
+      <div className="grid-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 mx-auto px-2 lg:px-6 max-w-8xl">
         {data.tierData.map((tier, idx: number) => {
           return (
             <Link

@@ -15,19 +15,19 @@ const nextConfig = {
       }
     ]
   },
-  async headers() {
-    return [
-      {
-        source: "/fonts/EduFavorit/EduFavorit-Regular.woff2",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-        ],
-      },
-    ];
-  },
+  // async headers() {
+  //   return [
+  //     {
+  //       source: "/fonts/EduFavorit/EduFavorit-Regular.woff2",
+  //       headers: [
+  //         {
+  //           key: "Cache-Control",
+  //           value: "public, max-age=31536000, immutable",
+  //         },
+  //       ],
+  //     },
+  //   ];
+  // },
 }
 
 module.exports = nextConfig

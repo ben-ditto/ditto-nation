@@ -20,6 +20,12 @@ const Footer = () => {
   );
 
   console.log(data);
+  let arr: any[] = [];
+
+  if (data) {
+    arr = data.data;
+    arr = arr.concat(arr);
+  }
 
   const [list, setList] = useState([]);
   // useEffect(() => {
@@ -57,13 +63,14 @@ const Footer = () => {
       </div>
 
       <Marquee
+        speed={1.5}
         pauseOnHover
         gradient={false}
-        className="p-4 uppercase font-bold !min-w-[70%]"
+        className="p-4 uppercase font-bold !min-w-[70%] hover:text-lime"
       >
         {data &&
-          data.data.map((el, idx) => (
-            <span key={idx}>
+          arr.map((el, idx) => (
+            <span key={idx} className="select-none">
               {el.Year}: {el.Population}
               {" - "}
             </span>

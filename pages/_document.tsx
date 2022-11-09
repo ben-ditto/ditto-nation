@@ -41,6 +41,20 @@ o00o.    0#####o,##. ,#"  "#######(
           crossOrigin="anonymous"
         />
         <link
+          rel="preload"
+          href="/fonts/EduFavorit/EduFavorit-Medium.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/EduFavorit/EduFavorit-Bold.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
           rel="shortcut icon"
           href="//cdn.shopify.com/s/files/1/0521/9357/files/favicon_32x32.png?v=1613553906"
           type="image/png"

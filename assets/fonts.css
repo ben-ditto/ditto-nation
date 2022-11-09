@@ -1,0 +1,18 @@
+@font-face {
+  font-family: "Edu Favorit";
+  src: url(/fonts/EduFavorit/EduFavorit-Regular.woff2) format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Edu Favorit";
+  src: url(/fonts/EduFavorit/EduFavorit-Medium.woff2) format("woff2");
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Edu Favorit";
+  src: url(/fonts/EduFavorit/EduFavorit-Bold.woff2) format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}

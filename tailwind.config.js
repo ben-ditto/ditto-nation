@@ -1,3 +1,5 @@
+const defaultTheme = require("tailwindcss/defaultTheme");
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -66,6 +68,9 @@ module.exports = {
       },
       scale: {
         120: '1.2',
+      },
+      fontFamily: {
+        EduFavorit: ["Edu Favorit", ...defaultTheme.fontFamily.sans],
       },
     },
   }
