@@ -11,12 +11,15 @@ import Marquee from "react-fast-marquee";
 import { Patreon, Instagram } from "components/Icons";
 
 const ENDPOINT = "http://127.0.0.1:4001";
-const TESTAPI = "http://api.open-notify.org/astros.json";
+const TESTAPI =
+  "https://datausa.io/api/data?drilldowns=Nation&measures=Population";
 
 const Footer = () => {
   const { isLoading, error, data, isFetching } = useQuery(["astro"], () =>
     axios.get(TESTAPI).then((res) => res.data)
   );
+
+  console.log(data);
 
   const [list, setList] = useState([]);
   // useEffect(() => {
@@ -59,8 +62,11 @@ const Footer = () => {
         className="p-4 uppercase font-bold !min-w-[70%]"
       >
         {data &&
-          data.people.map((el, idx) => (
-            <span key={idx}>{el.name + " - "}</span>
+          data.data.map((el, idx) => (
+            <span key={idx}>
+              {el.Year}: {el.Population}
+              {" - "}
+            </span>
           ))}
       </Marquee>
     </footer>
