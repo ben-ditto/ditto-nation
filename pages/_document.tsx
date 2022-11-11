@@ -33,6 +33,16 @@ o00o.    0#####o,##. ,#"  "#######(
  */`,
           }}
         />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin=""
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Michroma&display=swap"
+          rel="stylesheet"
+        />
         <link
           rel="preload"
           href="/fonts/EduFavorit/EduFavorit-Regular.woff2"

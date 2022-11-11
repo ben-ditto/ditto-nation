@@ -106,6 +106,11 @@ const ProductSingle: React.FC<IProps> = ({ product, context }) => {
       nookies.set(context, CHECKOUT_ID, checkoutCreate?.checkout?.id!, {
         maxAge: 30 * 24 * 60 * 60,
       });
+      queryClient.invalidateQueries(
+        useGetCartItemCountQuery.getKey({
+          checkoutId: checkoutCreate?.checkout?.id!,
+        })
+      );
       console.log("error");
     }
   };
@@ -167,7 +172,7 @@ const ProductSingle: React.FC<IProps> = ({ product, context }) => {
                 variantId: product?.variants?.nodes[0]?.id,
               });
             }}
-            loading={createCartLoading}
+            loading={createCartLoading && !isLoading}
             className="rounded-md py-3 mt-3 bg-black text-white md:max-w-xs hover:bg-accent-7"
           >
             Buy Now
