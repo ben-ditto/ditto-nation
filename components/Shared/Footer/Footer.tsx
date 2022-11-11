@@ -88,7 +88,7 @@ const Footer = () => {
       </div>
 
       <Marquee
-        speed={20}
+        speed={60}
         pauseOnHover
         gradient={false}
         className="px-4 teleFont text-xs font-bold !min-w-[70%] hover:text-pink"
