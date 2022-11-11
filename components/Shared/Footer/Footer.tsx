@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef } from "react";
 import socketIOClient from "socket.io-client";
 import axios from "axios";
 
+import useMedia from "use-media";
+
 //Fetch Patreon
 import {
   useQuery,
@@ -29,6 +31,8 @@ type restResponse = {
 const Footer = () => {
   const [list, setList] = useState<string[]>([]);
   const [firstRequest, setFirstRequest] = useState(false);
+
+  const isDesktop = useMedia({ minWidth: "1024px" });
 
   const { data, isLoading, isSuccess, isError, error } = useQuery<restResponse>(
     ["astro"],
@@ -88,7 +92,7 @@ const Footer = () => {
       </div>
 
       <Marquee
-        speed={60}
+        speed={isDesktop ? 30 : 60}
         pauseOnHover
         gradient={false}
         className="px-4 teleFont text-xs font-bold !min-w-[70%] hover:text-pink"
@@ -105,12 +109,14 @@ const Footer = () => {
             TODAY - NO DISCORD TODAY - NO DISCORD TODAY - NO DISCORD TODAY
           </span>
         )}
-        {list?.length > 0 &&
-          [...list].reverse().map((el, idx) => (
-            <span key={idx} className="select-none">
-              {` ${el} - `}
-            </span>
-          ))}
+        {list?.length > 0 && (
+          // [...list].reverse().map((el, idx) => (
+          //   <span key={idx} className="select-none">
+          //     {` ${el} - `}
+          //   </span>
+          // ))
+          <span>{[...list].reverse().join("  +++  ")}</span>
+        )}
       </Marquee>
     </footer>
   );
