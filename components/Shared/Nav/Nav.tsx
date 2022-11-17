@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import nookies from "nookies";
 
 import clsx from "clsx";
-import useMedia from "use-media";
+import useMedia from "lib/useMedia";
 
 import { useUI } from "components/UI/context";
 
@@ -35,7 +35,7 @@ const links = [
 ];
 
 const Navigation: React.FC<IProps> = () => {
-  const isDesktop = useMedia({ minWidth: "1024px" });
+  const isDesktop = useMedia();
 
   const CHECKOUT_ID = "CHECKOUT_ID";
   const checkoutId = nookies.get(null, CHECKOUT_ID).CHECKOUT_ID;

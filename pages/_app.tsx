@@ -87,10 +87,7 @@ function App({
   return (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={dehydratedState}>
-        <DefaultSeo
-          {...config}
-          // hello
-        />
+        <DefaultSeo {...config} />
         <ManagedUIContext>
           {getLayout(
             <AnimatePresence initial={false} mode="wait">
@@ -107,7 +104,7 @@ function App({
           )}
         </ManagedUIContext>
       </Hydrate>
-      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 }

@@ -1,4 +1,3 @@
-import Head from "next/head";
 import Link from "next/link";
 import { shopifyGraphqlRequestClient } from "src/lib/clients/graphqlRequestClient";
 import { NextSeo } from "next-seo";

@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import socketIOClient from "socket.io-client";
 import axios from "axios";
 
-import useMedia from "use-media";
+import useMedia from "lib/useMedia";
 
 //Fetch Patreon
 import {
@@ -32,10 +32,10 @@ const Footer = () => {
   const [list, setList] = useState<string[]>([]);
   const [firstRequest, setFirstRequest] = useState(false);
 
-  const isDesktop = useMedia({ minWidth: "1024px" });
+  const isDesktop = useMedia();
 
   const { data, isLoading, isSuccess, isError, error } = useQuery<restResponse>(
-    ["astro"],
+    ["messages"],
     () => axios.get(MSGENDPOINT).then((res) => res.data),
     {
       onSuccess: (data) => {
@@ -57,7 +57,7 @@ const Footer = () => {
       console.log("socketdata", data);
       let tempArr = [...list];
       console.log(tempArr);
-      if (tempArr.length > 15) {
+      if (tempArr.length > 10) {
         tempArr.splice(1, 1);
       }
       tempArr.push(data);
@@ -95,12 +95,13 @@ const Footer = () => {
         speed={isDesktop ? 30 : 60}
         pauseOnHover
         gradient={false}
-        className="px-4 teleFont text-xs font-bold !min-w-[70%] hover:text-pink"
+        className="px-4 teleFont text-xs font-bold !min-w-[70%] hover:text-pink cursor-pointer"
       >
         {isLoading && (
           <span className="select-none">
             Loading... Loading... Loading... Loading... Loading... Loading...
-            Loading... Loading... Loading... Loading... Loading... Loading...{" "}
+            Loading... Loading... Loading... Loading... Loading... Loading...
+            Loading... Loading... Loading... Loading...{" "}
           </span>
         )}
         {isError && (
@@ -115,7 +116,9 @@ const Footer = () => {
           //     {` ${el} - `}
           //   </span>
           // ))
-          <span>{[...list].reverse().join("  +++  ")}</span>
+          <span className="select-none">
+            {[...list].reverse().join("  +++  ")}
+          </span>
         )}
       </Marquee>
     </footer>
