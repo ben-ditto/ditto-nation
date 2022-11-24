@@ -72,7 +72,7 @@ const Footer = () => {
   }, [list]);
 
   return (
-    <footer className="fixed bottom-0 left-0 z-50 w-screen bg-black text-white grid grid-cols-[auto_auto]">
+    <footer className="fixed bottom-0 left-0 z-50 w-screen bg-black text-white grid grid-cols-[auto_auto] items-center">
       <div className="flex border-r border-r-white p-2">
         <button className="hover:opacity-80 mr-2">
           <a
@@ -91,36 +91,31 @@ const Footer = () => {
         </button>
       </div>
 
-      <Marquee
-        speed={isDesktop ? 10 : 18}
-        pauseOnHover
-        gradient={false}
-        className="px-4 teleFont text-xs font-bold !min-w-[70%] hover:text-pink cursor-pointer"
-      >
-        {isLoading && (
-          <span className="select-none whitespace-nowrap">
-            Loading... Loading... Loading... Loading... Loading... Loading...
-            Loading... Loading... Loading... Loading... Loading... Loading...
-            Loading... Loading... Loading... Loading...{" "}
-          </span>
-        )}
-        {isError && (
-          <span className="select-none whitespace-nowrap">
-            NO DISCORD TODAY - NO DISCORD TODAY - NO DISCORD TODAY - NO DISCORD
-            TODAY - NO DISCORD TODAY - NO DISCORD TODAY - NO DISCORD TODAY
-          </span>
-        )}
-        {list?.length > 0 && (
-          // [...list].reverse().map((el, idx) => (
-          //   <span key={idx} className="select-none">
-          //     {` ${el} - `}
-          //   </span>
-          // ))
+      {isLoading && (
+        <span className="select-none whitespace-nowrap">
+          Loading... Loading... Loading... Loading... Loading... Loading...
+          Loading... Loading... Loading... Loading... Loading... Loading...
+          Loading... Loading... Loading... Loading...{" "}
+        </span>
+      )}
+      {isError && (
+        <span className="select-none whitespace-nowrap">
+          NO DISCORD TODAY - NO DISCORD TODAY - NO DISCORD TODAY - NO DISCORD
+          TODAY - NO DISCORD TODAY - NO DISCORD TODAY - NO DISCORD TODAY
+        </span>
+      )}
+      {list?.length > 0 && (
+        <Marquee
+          speed={isDesktop ? 10 : 18}
+          pauseOnHover
+          gradient={false}
+          className="px-4 teleFont text-xs font-bold !min-w-[70%] hover:text-pink cursor-pointer"
+        >
           <span className="select-none whitespace-nowrap">
             {[...list].reverse().join("  +++  ")}
           </span>
-        )}
-      </Marquee>
+        </Marquee>
+      )}
     </footer>
   );
 };
