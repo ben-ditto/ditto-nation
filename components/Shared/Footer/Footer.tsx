@@ -106,7 +106,7 @@ const Footer = () => {
       )}
       {list?.length > 0 && (
         <Marquee
-          speed={isDesktop ? 10 : 18}
+          speed={isDesktop ? 20 : 24}
           pauseOnHover
           gradient={false}
           className="px-4 teleFont text-xs font-bold !min-w-[70%] hover:text-pink cursor-pointer"
