@@ -14,6 +14,7 @@ import {
 import { patreonRequestClient } from "src/lib/clients/axiosClient";
 
 //Components
+import MarqueeTwo from "components/Shared/Footer/components/Marquee";
 import Marquee from "react-fast-marquee";
 import { Patreon, Instagram } from "components/Icons";
 
@@ -58,6 +59,7 @@ const Footer = () => {
       let tempArr = [...list];
       console.log(tempArr);
       if (tempArr.length > 10) {
+        console.log(tempArr[1]);
         tempArr.splice(0, 1);
       }
       tempArr.push(data);
@@ -72,56 +74,35 @@ const Footer = () => {
   }, [list]);
 
   return (
-    <footer className="fixed bottom-0 left-0 z-50 w-screen bg-black text-white grid grid-cols-[auto_auto]">
-      <div className="flex border-r border-r-white p-2">
-        <button className="hover:opacity-80 mr-2">
-          <a
-            href="https://www.patreon.com/ben_ditto"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <Patreon className="h-5 w-6" />
-          </a>
-        </button>
-        <button className="hover:opacity-80 mr-2">
-          <img className="max-h-6" src="/instagram.svg" alt="Instagram Logo" />
-        </button>
-        <button className="hover:opacity-80">
-          <img className="max-h-6" src="/discord.svg" alt="Discord Logo" />
-        </button>
-      </div>
-
-      <Marquee
-        speed={isDesktop ? 10 : 18}
-        pauseOnHover
-        gradient={false}
-        className="px-4 teleFont text-xs font-bold !min-w-[70%] hover:text-pink cursor-pointer"
-      >
-        {isLoading && (
-          <span className="select-none whitespace-nowrap">
-            Loading... Loading... Loading... Loading... Loading... Loading...
-            Loading... Loading... Loading... Loading... Loading... Loading...
-            Loading... Loading... Loading... Loading...{" "}
-          </span>
-        )}
-        {isError && (
-          <span className="select-none whitespace-nowrap">
-            NO DISCORD TODAY - NO DISCORD TODAY - NO DISCORD TODAY - NO DISCORD
-            TODAY - NO DISCORD TODAY - NO DISCORD TODAY - NO DISCORD TODAY
-          </span>
-        )}
+    <>
+      {/* {isLoading && (
+        <span className="select-none">
+          Loading... Loading... Loading... Loading... Loading... Loading...
+          Loading... Loading... Loading... Loading... Loading... Loading...
+          Loading... Loading... Loading... Loading...{" "}
+        </span>
+      )}
+      {isError && (
+        <span className="select-none">
+          NO DISCORD TODAY - NO DISCORD TODAY - NO DISCORD TODAY - NO DISCORD
+          TODAY - NO DISCORD TODAY - NO DISCORD TODAY - NO DISCORD TODAY
+        </span>
+      )}
+      <Marquee speed={isDesktop ? 10 : 10} delay={2}>
         {list?.length > 0 && (
           // [...list].reverse().map((el, idx) => (
           //   <span key={idx} className="select-none">
           //     {` ${el} - `}
           //   </span>
           // ))
-          <span className="select-none whitespace-nowrap">
+          <span className="select-none">
             {[...list].reverse().join("  +++  ")}
           </span>
         )}
-      </Marquee>
-    </footer>
+      </Marquee> */}
+
+      <MarqueeTwo />
+    </>
   );
 };
 

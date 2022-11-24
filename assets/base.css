@@ -119,6 +119,10 @@ a {
   animation: blinker 1s linear infinite;
 }
 
+/* Marquee stuff */
+
+
+
 @-webkit-keyframes fadeIn {
   from {
     opacity: 0;
