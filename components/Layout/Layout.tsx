@@ -39,11 +39,11 @@ const Layout: React.FC<IProps> = ({ main }) => {
       <Footer />
       <FeatureBar
         title="This site uses cookies to improve your experience. By clicking, you agree to our Privacy Policy."
-        hide={false}
+        hide={acceptedCookies}
         className="border-t border-black"
         action={
           <Button
-            className="rounded-md px-2 py-1 md:max-w-xs hover:bg-lime"
+            className="rounded-md px-1 py-1 md:max-w-xs hover:bg-accent-2"
             onClick={() => onAcceptCookies()}
           >
             Accept cookies
