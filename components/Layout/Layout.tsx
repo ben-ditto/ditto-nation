@@ -1,14 +1,14 @@
 import React, { ReactElement, useEffect } from "react";
-import Link from "next/link";
 import clsx from "clsx";
 
-import { gql } from "graphql-request";
-import { GraphQLResponse } from "graphql-request/dist/types";
-
+//Hooks
 import { useUI } from "components/UI/context";
+import { useAcceptCookies } from "lib/useAcceptCookies";
 //components
 import Nav from "components/Shared/Nav";
 import Footer from "components/Shared/Footer";
+import FeatureBar from "components/Shared/FeatureBar";
+import Button from "components/UI/Button";
 
 interface IProps {
   main: React.ReactNode;
@@ -16,6 +16,7 @@ interface IProps {
 
 const Layout: React.FC<IProps> = ({ main }) => {
   const { displayMenu } = useUI();
+  const { acceptedCookies, onAcceptCookies } = useAcceptCookies();
 
   // useEffect(() => {
   //   console.log("rerender");
@@ -36,6 +37,19 @@ const Layout: React.FC<IProps> = ({ main }) => {
         {main}
       </main>
       <Footer />
+      <FeatureBar
+        title="This site uses cookies to improve your experience. By clicking, you agree to our Privacy Policy."
+        hide={acceptedCookies}
+        className="border-t border-black"
+        action={
+          <Button
+            className="rounded-md px-1 py-1 md:max-w-xs hover:bg-accent-2"
+            onClick={() => onAcceptCookies()}
+          >
+            Accept cookies
+          </Button>
+        }
+      />
     </>
   );
 };

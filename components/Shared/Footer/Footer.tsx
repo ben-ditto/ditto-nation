@@ -80,26 +80,55 @@ const Footer = () => {
             target="_blank"
             rel="noreferrer"
           >
-            <Patreon className="h-5 w-6" />
+            <Patreon className="h-5 w-4 md:w-6" />
           </a>
         </button>
         <button className="hover:opacity-80 mr-2">
-          <img className="max-h-6" src="/instagram.svg" alt="Instagram Logo" />
+          <a
+            href="https://instagram.com/ditto_nation?igshid=YmMyMTA2M2Y="
+            target="_blank"
+            rel="noreferrer"
+          >
+            <img
+              className="max-h-6 w-5 md:w-6"
+              src="/instagram.svg"
+              alt="Instagram Logo"
+            />
+          </a>
         </button>
         <button className="hover:opacity-80">
-          <img className="max-h-6" src="/discord.svg" alt="Discord Logo" />
+          <a
+            href="https://discord.gg/EsfaJfBx"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <img
+              className="max-h-6 w-5 md:w-6"
+              src="/discord.svg"
+              alt="Discord Logo"
+            />
+          </a>
+        </button>
+        <button className="ml-2 hover:opacity-80">
+          <a href="https://t.me/ditto_nation" target="_blank" rel="noreferrer">
+            <img
+              className="h-6 w-5 md:w-6"
+              src="/telegram.svg"
+              alt="Telegram Logo"
+            />
+          </a>
         </button>
       </div>
 
       {isLoading && (
-        <span className="select-none whitespace-nowrap">
+        <span className="teleFont  select-none whitespace-nowrap">
           Loading... Loading... Loading... Loading... Loading... Loading...
           Loading... Loading... Loading... Loading... Loading... Loading...
           Loading... Loading... Loading... Loading...{" "}
         </span>
       )}
       {isError && (
-        <span className="select-none whitespace-nowrap">
+        <span className="teleFont  select-none whitespace-nowrap">
           NO DISCORD TODAY - NO DISCORD TODAY - NO DISCORD TODAY - NO DISCORD
           TODAY - NO DISCORD TODAY - NO DISCORD TODAY - NO DISCORD TODAY
         </span>
