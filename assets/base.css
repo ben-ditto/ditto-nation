@@ -99,9 +99,9 @@ a {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-.teleFont {
+/* .teleFont {
   font-family: 'Roboto Mono', monospace;
-}
+} */
 
 .animated {
   -webkit-animation-duration: 1s;

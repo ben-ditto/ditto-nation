@@ -38,6 +38,9 @@ const ProductSingle: React.FC<IProps> = ({ product, context }) => {
 
   const queryClient = useQueryClient();
 
+  //Variable for trying stuff out
+  // let newCheckoutId: string;
+
   // Create Cart
   const {
     mutateAsync: mutateCreateCartAsync,
@@ -51,11 +54,8 @@ const ProductSingle: React.FC<IProps> = ({ product, context }) => {
         _variables: CreateCartMutationVariables,
         _context: unknown
       ) => {
-        queryClient.invalidateQueries(useCreateCartMutation.getKey());
+        // queryClient.invalidateQueries(useCreateCartMutation.getKey());
         queryClient.invalidateQueries(useAddCartItemMutation.getKey());
-        queryClient.invalidateQueries(
-          useGetCartItemCountQuery.getKey({ checkoutId: null })
-        );
       },
       onError: () => {
         console.log(error);
@@ -103,12 +103,16 @@ const ProductSingle: React.FC<IProps> = ({ product, context }) => {
         input: { lineItems: [lineItem] },
       });
 
+      // newCheckoutId = checkoutCreate?.checkout?.id;
+
       nookies.set(context, CHECKOUT_ID, checkoutCreate?.checkout?.id!, {
         maxAge: 30 * 24 * 60 * 60,
       });
+
+      queryClient.invalidateQueries(useAddCartItemMutation.getKey());
       queryClient.invalidateQueries(
         useGetCartItemCountQuery.getKey({
-          checkoutId: checkoutCreate?.checkout?.id!,
+          checkoutId: checkoutCreate?.checkout?.id,
         })
       );
       console.log("error");
@@ -172,7 +176,7 @@ const ProductSingle: React.FC<IProps> = ({ product, context }) => {
                 variantId: product?.variants?.nodes[0]?.id,
               });
             }}
-            loading={createCartLoading && !isLoading}
+            // loading={createCartLoading && !isLoading}
             className="rounded-md py-3 mt-3 bg-black text-white md:max-w-xs hover:bg-accent-7"
           >
             Buy Now

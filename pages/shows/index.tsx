@@ -22,27 +22,31 @@ const ShowsPage = ({ data }) => {
         }}
       />
       <div className="absolute top-0 left-0 !w-screen">
-        {posts.map((post, idx) => {
-          return (
-            <Link
-              key={idx}
-              passHref
-              href={`https://patreon.com${post.attributes.url}`}
-            >
-              <a target="_blank">
-                <article
-                  key={idx}
-                  className="w-full py-6 px-8 text-2xl hover:bg-pink border-b border-black transition-all duration-200 ease-in-out"
-                >
-                  <h2 className="uppercase font-bold">
-                    {post.attributes.title}
-                  </h2>
-                  {/* <p>{post.attributes.content}</p> */}
-                </article>
-              </a>
-            </Link>
-          );
-        })}
+        {posts.length > 0 ? (
+          posts.map((post, idx) => {
+            return (
+              <Link
+                key={idx}
+                passHref
+                href={`https://patreon.com${post.attributes.url}`}
+              >
+                <a target="_blank">
+                  <article
+                    key={idx}
+                    className="w-full py-6 px-8 text-2xl hover:bg-pink border-b border-black transition-all duration-200 ease-in-out"
+                  >
+                    <h2 className="uppercase font-bold">
+                      {post.attributes.title}
+                    </h2>
+                    {/* <p>{post.attributes.content}</p> */}
+                  </article>
+                </a>
+              </Link>
+            );
+          })
+        ) : (
+          <h2 className="text-center">No Posts Yet</h2>
+        )}
       </div>
     </>
   );

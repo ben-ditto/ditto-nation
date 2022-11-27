@@ -15,7 +15,7 @@ import { patreonRequestClient } from "src/lib/clients/axiosClient";
 
 //Components
 import Marquee from "react-fast-marquee";
-import { Patreon, Instagram } from "components/Icons";
+import { Patreon, Telegram, Instagram } from "components/Icons";
 
 // const ENDPOINT = "http://127.0.0.1:4001";
 const ENDPOINT = "https://ditto-discord.herokuapp.com";
@@ -83,17 +83,13 @@ const Footer = () => {
             <Patreon className="h-5 w-4 md:w-6" />
           </a>
         </button>
-        <button className="hover:opacity-80 mr-2">
+        <button className="hover:opacity-80">
           <a
             href="https://instagram.com/ditto_nation?igshid=YmMyMTA2M2Y="
             target="_blank"
             rel="noreferrer"
           >
-            <img
-              className="max-h-6 w-5 md:w-6"
-              src="/instagram.svg"
-              alt="Instagram Logo"
-            />
+            <Instagram className="h-6 w-5 md:w-6" />
           </a>
         </button>
         {/* <button className="hover:opacity-80">
@@ -111,11 +107,7 @@ const Footer = () => {
         </button> */}
         <button className="ml-2 hover:opacity-80">
           <a href="https://t.me/ditto_nation" target="_blank" rel="noreferrer">
-            <img
-              className="h-6 w-5 md:w-6"
-              src="/telegram.svg"
-              alt="Telegram Logo"
-            />
+            <Telegram className="h-5 w-5 md:w-6" />
           </a>
         </button>
       </div>
