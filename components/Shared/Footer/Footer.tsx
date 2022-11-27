@@ -76,7 +76,7 @@ const Footer = () => {
       <div className="flex border-r border-r-white p-2">
         <button className="hover:opacity-80 mr-2">
           <a
-            href="https://www.patreon.com/ben_ditto"
+            href="https://www.patreon.com/ditto_nation"
             target="_blank"
             rel="noreferrer"
           >
@@ -96,7 +96,7 @@ const Footer = () => {
             />
           </a>
         </button>
-        <button className="hover:opacity-80">
+        {/* <button className="hover:opacity-80">
           <a
             href="https://discord.gg/EsfaJfBx"
             target="_blank"
@@ -108,7 +108,7 @@ const Footer = () => {
               alt="Discord Logo"
             />
           </a>
-        </button>
+        </button> */}
         <button className="ml-2 hover:opacity-80">
           <a href="https://t.me/ditto_nation" target="_blank" rel="noreferrer">
             <img
@@ -134,16 +134,18 @@ const Footer = () => {
         </span>
       )}
       {list?.length > 0 && (
-        <Marquee
-          speed={isDesktop ? 20 : 24}
-          pauseOnHover
-          gradient={false}
-          className="px-4 teleFont text-xs font-bold !min-w-[70%] hover:text-pink cursor-pointer"
-        >
-          <span className="select-none whitespace-nowrap">
-            {[...list].reverse().join("  +++  ")}
-          </span>
-        </Marquee>
+        <a href="https://discord.gg/EsfaJfBx" target="_blank" rel="noreferrer">
+          <Marquee
+            speed={isDesktop ? 20 : 24}
+            pauseOnHover
+            gradient={false}
+            className="px-4 teleFont text-xs font-bold !min-w-[70%] hover:text-pink cursor-pointer"
+          >
+            <span className="select-none whitespace-nowrap">
+              {[...list].reverse().join("  +++  ")}
+            </span>
+          </Marquee>
+        </a>
       )}
     </footer>
   );
