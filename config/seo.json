@@ -8,11 +8,10 @@
     "description": "Ditto Nation",
     "type": "website",
     "locale": "en_IE",
-    "url": "https://ditto-nation.com",
     "site_name": "Ditto Nation",
     "images": [
       {
-        "url": "/card.png",
+        "url": "/sharecard.png",
         "width": 800,
         "height": 600,
         "alt": "Ditto Nation"
