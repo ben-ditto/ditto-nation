@@ -83,16 +83,8 @@ const Footer = () => {
             <Patreon className="h-5 w-4 md:w-6" />
           </a>
         </button>
+
         <button className="hover:opacity-80">
-          <a
-            href="https://instagram.com/ditto_nation?igshid=YmMyMTA2M2Y="
-            target="_blank"
-            rel="noreferrer"
-          >
-            <Instagram className="h-6 w-5 md:w-6" />
-          </a>
-        </button>
-        {/* <button className="hover:opacity-80">
           <a
             href="https://discord.gg/EsfaJfBx"
             target="_blank"
@@ -100,14 +92,14 @@ const Footer = () => {
           >
             <img
               className="max-h-6 w-5 md:w-6"
-              src="/discord.svg"
-              alt="Discord Logo"
+              src="/instagram.svg"
+              alt="Instagram Logo"
             />
           </a>
-        </button> */}
-        <button className="ml-2 hover:opacity-80">
+        </button>
+        <button className="ml-3 hover:opacity-80">
           <a href="https://t.me/ditto_nation" target="_blank" rel="noreferrer">
-            <Telegram className="h-5 w-5 md:w-6" />
+            <Telegram className="h-6 w-6 md:w-6" />
           </a>
         </button>
       </div>
@@ -126,18 +118,22 @@ const Footer = () => {
         </span>
       )}
       {list?.length > 0 && (
-        <a href="https://discord.gg/EsfaJfBx" target="_blank" rel="noreferrer">
-          <Marquee
-            speed={isDesktop ? 20 : 24}
-            pauseOnHover
-            gradient={false}
-            className="px-4 teleFont text-xs font-bold !min-w-[70%] hover:text-pink cursor-pointer"
+        <Marquee
+          speed={isDesktop ? 20 : 24}
+          pauseOnHover
+          gradient={false}
+          className="px-4 teleFont text-xs font-bold !min-w-[70%] hover:text-pink cursor-pointer"
+        >
+          <a
+            href="https://discord.gg/EsfaJfBx"
+            target="_blank"
+            rel="noreferrer"
           >
             <span className="select-none whitespace-nowrap">
               {[...list].reverse().join("  +++  ")}
             </span>
-          </Marquee>
-        </a>
+          </a>
+        </Marquee>
       )}
     </footer>
   );
