@@ -97,9 +97,13 @@ const Footer = () => {
             />
           </a>
         </button>
-        <button className="ml-3 hover:opacity-80">
+        <button className="ml-2 hover:opacity-80">
           <a href="https://t.me/ditto_nation" target="_blank" rel="noreferrer">
-            <Telegram className="h-6 w-6 md:w-6" />
+            <img
+              className="max-h-6 w-5 md:w-6"
+              src="/telegram.svg"
+              alt="Instagram Logo"
+            />
           </a>
         </button>
       </div>
