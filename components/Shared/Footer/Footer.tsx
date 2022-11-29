@@ -86,7 +86,7 @@ const Footer = () => {
 
         <button className="hover:opacity-80">
           <a
-            href="https://discord.gg/EsfaJfBx"
+            href="https://instagram.com/ditto_nation?igshid=YmMyMTA2M2Y="
             target="_blank"
             rel="noreferrer"
           >
@@ -102,7 +102,7 @@ const Footer = () => {
             <img
               className="max-h-6 w-5 md:w-6"
               src="/telegram.svg"
-              alt="Instagram Logo"
+              alt="Telegram Logo"
             />
           </a>
         </button>
