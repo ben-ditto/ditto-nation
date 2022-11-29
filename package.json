@@ -8,9 +8,11 @@
     "start": "next start",
     "postbuild": "next-sitemap",
     "lint": "next lint",
-    "graphql:codegen": "graphql-codegen --config codegen.yml"
+    "graphql:codegen": "graphql-codegen --config codegen.ts"
   },
   "dependencies": {
+    "@graphql-codegen/cli": "^2.14.1",
+    "@graphql-codegen/client-preset": "^1.2.0",
     "@tanstack/react-query": "^4.0.10",
     "@tanstack/react-query-devtools": "^4.0.10",
     "@types/node": "^18.0.6",
@@ -35,7 +37,6 @@
     "typescript": "^4.7.4"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "2.9.1",
     "@graphql-codegen/typescript": "2.7.2",
     "@graphql-codegen/typescript-graphql-request": "^4.5.2",
     "@graphql-codegen/typescript-operations": "2.5.2",
