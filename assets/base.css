@@ -103,6 +103,20 @@ a {
   font-family: 'Roboto Mono', monospace;
 } */
 
+.inner-html > h1, h2, h2 > *{
+  font-size: xx-large;
+  font-weight: 900;
+  padding-bottom: 1.5rem;
+}
+
+.inner-html > div > p {
+  padding-bottom: 1rem;
+}
+
+.inner-html > div > ol{
+  list-style: disc inside none;
+}
+
 .animated {
   -webkit-animation-duration: 1s;
   animation-duration: 1s;

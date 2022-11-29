@@ -12,7 +12,7 @@ import { getLayout } from "components/Layout/Layout";
 
 import { useGetShopInfoQuery, GetShopInfoQuery } from "src/generated/graphql";
 
-const ShippingPage = () => {
+const LegalPage = () => {
   const { isLoading, error, data } = useGetShopInfoQuery<
     GetShopInfoQuery,
     Error
@@ -24,26 +24,26 @@ const ShippingPage = () => {
   return (
     <>
       <NextSeo
-        title="Shipping"
-        description={"Shipping"}
+        title="Legal"
+        description={"Legal"}
         openGraph={{
           type: "website",
-          title: "Shipping",
-          description: "Shipping",
+          title: "Legal",
+          description: "Legal",
         }}
       />
 
       <div
         className="max-w-8xl inner-html"
-        dangerouslySetInnerHTML={{ __html: data?.shop?.shippingPolicy?.body }}
+        dangerouslySetInnerHTML={{ __html: data?.shop.termsOfService?.body }}
       />
     </>
   );
 };
 
-ShippingPage.getLayout = getLayout;
+LegalPage.getLayout = getLayout;
 
-export default ShippingPage;
+export default LegalPage;
 
 export const getStaticProps = async () => {
   const queryClient = new QueryClient();

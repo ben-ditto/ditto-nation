@@ -6861,7 +6861,7 @@ export type GetProductBySlugQuery = { __typename?: 'QueryRoot', productByHandle?
 export type GetShopInfoQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetShopInfoQuery = { __typename?: 'QueryRoot', shop: { __typename?: 'Shop', id: string, moneyFormat: string, name: string, description?: string | null, shippingPolicy?: { __typename?: 'ShopPolicy', title: string, url: any, body: string } | null, refundPolicy?: { __typename?: 'ShopPolicy', body: string } | null, primaryDomain: { __typename?: 'Domain', url: any }, brand?: { __typename?: 'Brand', colors: { __typename?: 'BrandColors', primary: Array<{ __typename?: 'BrandColorGroup', background?: any | null }>, secondary: Array<{ __typename?: 'BrandColorGroup', background?: any | null }> }, coverImage?: { __typename?: 'MediaImage', id: string, image?: { __typename?: 'Image', url: any } | null } | null } | null } };
+export type GetShopInfoQuery = { __typename?: 'QueryRoot', shop: { __typename?: 'Shop', id: string, moneyFormat: string, name: string, description?: string | null, shippingPolicy?: { __typename?: 'ShopPolicy', title: string, url: any, body: string } | null, privacyPolicy?: { __typename?: 'ShopPolicy', body: string } | null, termsOfService?: { __typename?: 'ShopPolicy', body: string } | null, refundPolicy?: { __typename?: 'ShopPolicy', body: string } | null, primaryDomain: { __typename?: 'Domain', url: any }, brand?: { __typename?: 'Brand', colors: { __typename?: 'BrandColors', primary: Array<{ __typename?: 'BrandColorGroup', background?: any | null }>, secondary: Array<{ __typename?: 'BrandColorGroup', background?: any | null }> }, coverImage?: { __typename?: 'MediaImage', id: string, image?: { __typename?: 'Image', url: any } | null } | null } | null } };
 
 export const PaginatedProductListFragmentDoc = `
     fragment PaginatedProductList on ProductConnection {
@@ -7357,6 +7357,12 @@ export const GetShopInfoDocument = `
     shippingPolicy {
       title
       url
+      body
+    }
+    privacyPolicy {
+      body
+    }
+    termsOfService {
       body
     }
     refundPolicy {

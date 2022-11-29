@@ -42,7 +42,9 @@ const About = () => {
             </Link>
           </li>
           <li className="hover:text-pink transition-all duration-150 ease-linear">
-            Legal
+            <Link href="/legal">
+              <a>Terms & Conditions</a>
+            </Link>
           </li>
         </ul>
       </section>

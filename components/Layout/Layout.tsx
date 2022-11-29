@@ -1,4 +1,5 @@
 import React, { ReactElement, useEffect } from "react";
+import Link from "next/link";
 import clsx from "clsx";
 
 //Hooks
@@ -38,7 +39,8 @@ const Layout: React.FC<IProps> = ({ main }) => {
       </main>
       <Footer />
       <FeatureBar
-        title="This site uses cookies to improve your experience. By clicking, you agree to our Privacy Policy."
+        title={`This site uses cookies to improve your experience. By clicking, you agree to our terms and Conditions
+        `}
         hide={acceptedCookies}
         className="border-t border-black"
         action={
