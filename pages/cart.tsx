@@ -44,7 +44,15 @@ const CartPage = (context?: NextPageContext) => {
 
   const emptyMessage = (
     <>
-      <NextSeo title="Cart" />
+      <NextSeo
+        title={"Cart"}
+        description={"My Cart"}
+        openGraph={{
+          type: "website",
+          title: "Cart",
+          description: "My Cart",
+        }}
+      />
       <h1 className="text-center uppercase font-bold text-2xl">cart empty</h1>
     </>
   );

@@ -29,6 +29,7 @@ export default function Home() {
           type: "website",
           title: data?.shop?.name ?? "Home",
           description: data?.shop?.description ?? "Ditto Nation Homepage",
+          url: "https://www.ditto-nation.com/",
           images: [
             {
               url: data?.shop?.brand?.coverImage?.image?.url!,

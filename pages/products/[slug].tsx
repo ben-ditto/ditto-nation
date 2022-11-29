@@ -42,6 +42,8 @@ const ProductPage = (context?: NextPageContext) => {
 
   if (!product) router.replace("/");
 
+  console.log(pid);
+
   return (
     <>
       <NextSeo
@@ -53,7 +55,7 @@ const ProductPage = (context?: NextPageContext) => {
           description: product.description,
           images: [
             {
-              url: product?.images?.nodes[0]?.url!,
+              url: product?.images?.nodes[0]?.url,
               width: 800,
               height: 600,
               alt: product.title,

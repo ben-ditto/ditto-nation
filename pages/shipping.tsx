@@ -23,7 +23,16 @@ const ShippingPage = () => {
 
   return (
     <>
-      <NextSeo title="Shipping" />
+      <NextSeo
+        title="Shipping"
+        description={"Shipping"}
+        openGraph={{
+          type: "website",
+          title: "Shipping",
+          description: "Shipping",
+        }}
+      />
+
       <div
         className="max-w-8xl"
         dangerouslySetInnerHTML={{ __html: data?.shop?.shippingPolicy?.body }}

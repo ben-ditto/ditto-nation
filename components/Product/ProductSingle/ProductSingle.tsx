@@ -34,7 +34,6 @@ interface IProps {
 
 const ProductSingle: React.FC<IProps> = ({ product, context }) => {
   const [quantity, setQuantity] = useState<number>(1);
-  const router = useRouter();
 
   const queryClient = useQueryClient();
 

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 
+import { NextSeo } from "next-seo";
 //Layout
 import { getLayout } from "components/Layout/Layout";
 
@@ -11,7 +12,13 @@ const Error = () => {
     router.replace("/");
   });
 
-  return <div className="w-screen h-screen grid self-center">404</div>;
+  return (
+    <>
+      <NextSeo noindex={true} />
+
+      <div className="w-screen h-screen grid self-center">404</div>
+    </>
+  );
 };
 
 Error.getLayout = getLayout;

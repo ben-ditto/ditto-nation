@@ -28,7 +28,16 @@ const SubscribePage = ({ data }) => {
 
   return (
     <>
-      <NextSeo title="Subscribe" description="Patreon Subscribtions" />
+      <NextSeo
+        title={"Subscribe"}
+        description={"Patreon Subscribtions"}
+        openGraph={{
+          type: "website",
+          title: "Subscribe",
+          description: "Patreon Subscribtions",
+          url: "https://www.ditto-nation.com/subscribe",
+        }}
+      />
       <div className="grid-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 mx-auto px-2 lg:px-6 max-w-8xl">
         {data.tierData.map((tier, idx: number) => {
           return (

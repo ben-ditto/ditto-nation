@@ -52,6 +52,7 @@ export default function ProductsPage() {
           type: "website",
           title: "All Products",
           description: "Display All Products",
+          url: "https://www.ditto-nation.com/products",
         }}
       />
 

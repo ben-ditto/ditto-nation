@@ -10,7 +10,16 @@ import { getLayout } from "components/Layout/Layout";
 const About = () => {
   return (
     <>
-      <NextSeo title="About" />
+      <NextSeo
+        title={"About"}
+        description={"About Page"}
+        openGraph={{
+          type: "website",
+          title: "About",
+          description: "About Page",
+          url: "https://www.ditto-nation.com/about",
+        }}
+      />
 
       <section className="px-4 max-w-8xl mx-auto">
         <h1 className="uppercase font-bold text-2xl lg:text-3xl">About</h1>
