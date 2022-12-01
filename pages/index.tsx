@@ -40,7 +40,6 @@ export default function Home() {
           ],
         }}
       />
-      <NextSeo title="Home" />
       <div
         style={{
           backgroundImage:
