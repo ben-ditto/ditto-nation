@@ -12,7 +12,7 @@ const nextConfig = {
         source: '/404',
         destination: '/',
         permanent: true
-      }
+      },
     ]
   },
   // async headers() {

@@ -2,25 +2,29 @@ import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 
 import { NextSeo } from "next-seo";
+import Error from "next/error";
 //Layout
 import { getLayout } from "components/Layout/Layout";
 
-const Error = () => {
+const Error404 = () => {
   const router = useRouter();
 
   useEffect(() => {
-    router.replace("/");
+    window.location.replace("/");
+    // router.replace("/");
   });
 
   return (
     <>
       <NextSeo noindex={true} />
 
-      <div className="w-screen h-screen grid self-center">404</div>
+      <div className="w-screen h-screen grid self-center text-center">
+        <Error statusCode={404} />
+      </div>
     </>
   );
 };
 
-Error.getLayout = getLayout;
+Error404.getLayout = getLayout;
 
-export default Error;
+export default Error404;
