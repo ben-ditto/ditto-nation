@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { useRouter } from "next/router";
 import { shopifyGraphqlRequestClient } from "src/lib/clients/graphqlRequestClient";
 import { NextSeo } from "next-seo";
 
@@ -17,6 +17,8 @@ import {
 } from "src/generated/graphql";
 
 export default function ProductsPage() {
+  const router = useRouter();
+
   const { isLoading, error, data, isSuccess, fetchNextPage, hasNextPage } =
     useInfiniteGetAllProductsQuery<GetAllProductsQuery, Error>(
       "after",
@@ -41,7 +43,9 @@ export default function ProductsPage() {
 
   if (isLoading) return <Loader />;
 
-  if (error) return <h1>{JSON.stringify(error)}</h1>;
+  if (error) {
+    router.replace("/");
+  }
 
   return (
     <>

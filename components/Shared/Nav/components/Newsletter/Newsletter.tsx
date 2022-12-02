@@ -91,7 +91,7 @@ const Newsletter = () => {
       {isError && (
         <span className="hidden md:block text-pink text-sm uppercase ml-3 align-bottom">
           Error Subscribing!
-          {JSON.stringify(error)}
+          {/* {JSON.stringify(error)} */}
         </span>
       )}
     </div>
