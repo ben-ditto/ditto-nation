@@ -18,11 +18,14 @@ import Marquee from "react-fast-marquee";
 import { Patreon, Telegram, Instagram } from "components/Icons";
 
 // const ENDPOINT = "http://127.0.0.1:4001";
-const ENDPOINT = "https://ditto-discord.herokuapp.com";
+const ENDPOINT = process.env.NEXT_PUBLIC_DISCORD_SERVER_DOMAIN;
+// const ENDPOINT = "https://ditto-discord.herokuapp.com";
 // const MSGENDPOINT = "http://127.0.0.1:4001/messages";
-const MSGENDPOINT = "https://ditto-discord.herokuapp.com/messages";
+const MSGENDPOINT = `${ENDPOINT}/messages`;
 const TESTAPI =
   "https://datausa.io/api/data?drilldowns=Nation&measures=Population";
+
+console.log("ep", ENDPOINT);
 
 type restResponse = {
   messages: string[];
