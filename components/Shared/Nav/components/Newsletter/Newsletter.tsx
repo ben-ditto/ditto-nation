@@ -33,7 +33,7 @@ const Newsletter = () => {
     return res.data;
   };
 
-  const { mutate, isLoading, isError } = useMutation(subscribeUser, {
+  const { mutate, isLoading, isError, error } = useMutation(subscribeUser, {
     onSuccess: (data) => {
       console.log("response", data); //This is the response you get back
       setResponse(data);
@@ -91,6 +91,7 @@ const Newsletter = () => {
       {isError && (
         <span className="hidden md:block text-pink text-sm uppercase ml-3 align-bottom">
           Error Subscribing!
+          {JSON.stringify(error)}
         </span>
       )}
     </div>
