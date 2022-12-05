@@ -28,12 +28,16 @@ const ProductView: React.FC<IProps> = ({ images }) => {
         slidesPerView={1}
         centeredSlides={true}
         navigation
+        autoHeight={true}
         onSwiper={setSwiper}
-        onSlideChange={() => console.log("slide change")}
+        // onSlideChange={() => console.log("slide change")}
       >
         {images.map((image) => {
           return (
-            <SwiperSlide key={image.id}>
+            <SwiperSlide
+              className=" flex justify-center items-center"
+              key={image.id}
+            >
               <Image
                 src={image.url}
                 alt={image.altText}
@@ -43,6 +47,7 @@ const ProductView: React.FC<IProps> = ({ images }) => {
                 // blurDataURL={image.url} //automatically provided
                 // placeholder="blur" // Optional blur-up while loading
               />
+              {/* </div> */}
             </SwiperSlide>
           );
         })}
