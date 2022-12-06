@@ -112,14 +112,14 @@ const Footer = () => {
       </div>
 
       {isLoading && (
-        <span className="teleFont  select-none whitespace-nowrap">
+        <span className="teleFont overflow-hidden select-none px-4 teleFont text-xs font-bold !max-w-[70%] hover:text-pink cursor-pointer whitespace-nowrap">
           Loading... Loading... Loading... Loading... Loading... Loading...
           Loading... Loading... Loading... Loading... Loading... Loading...
           Loading... Loading... Loading... Loading...{" "}
         </span>
       )}
       {isError && (
-        <span className="teleFont  select-none whitespace-nowrap">
+        <span className="teleFont overflow-hidden  select-none whitespace-nowrap px-4 teleFont text-xs font-bold !max-w-[70%] hover:text-pink cursor-pointer">
           NO DISCORD TODAY - NO DISCORD TODAY - NO DISCORD TODAY - NO DISCORD
           TODAY - NO DISCORD TODAY - NO DISCORD TODAY - NO DISCORD TODAY
         </span>
