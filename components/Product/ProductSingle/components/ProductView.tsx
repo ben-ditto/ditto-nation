@@ -11,7 +11,7 @@ import "swiper/css/scrollbar";
 import "swiper/css/effect-flip";
 
 //Hooks
-import useMedia from "lib/useMedia";
+import { useMediaQuery } from "lib/useMedia";
 import { Image as ProductImage } from "src/generated/graphql";
 
 interface IProps {
@@ -21,7 +21,7 @@ interface IProps {
 const ProductView: React.FC<IProps> = ({ images }) => {
   const [swiper, setSwiper] = useState<Swiper>();
 
-  const isDesktop = useMedia();
+  const matches = useMediaQuery("(min-width: 668px)");
 
   return (
     <div>
@@ -33,7 +33,7 @@ const ProductView: React.FC<IProps> = ({ images }) => {
         slidesPerView={1}
         centeredSlides={true}
         navigation
-        autoHeight={isDesktop}
+        autoHeight={matches}
         onSwiper={setSwiper}
         // onSlideChange={() => console.log("slide change")}
       >
