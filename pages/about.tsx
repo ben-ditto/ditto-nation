@@ -45,17 +45,17 @@ const About = () => {
             <li>
               <h3 className="underline pt-2 underline-offset-2">Instagram</h3>
               <ol>
-                <li className="hover:text-pink">
+                <li className="hover:text-pink break-words pb-2">
                   <a href="https://www.instagram.com/ben_ditto/">
                     https://www.instagram.com/ben_ditto/
                   </a>
                 </li>
-                <li className="hover:text-pink">
+                <li className="hover:text-pink break-words pb-2">
                   <a href="https://www.instagram.com/ben_ditto_resurrections/">
                     https://www.instagram.com/ben_ditto_resurrections/
                   </a>
                 </li>
-                <li className="hover:text-pink">
+                <li className="hover:text-pink break-words">
                   <a href="https://www.instagram.com/ditto_nation/">
                     https://www.instagram.com/ditto_nation/
                   </a>
@@ -66,17 +66,17 @@ const About = () => {
               <h3 className="underline pt-2 underline-offset-2">Telegram</h3>
 
               <ol>
-                <li>
+                <li className="pb-2">
                   <a
-                    className="hover:text-pink"
+                    className="hover:text-pink break-words"
                     href="https://t.me/ditto_nation"
                   >
                     https://t.me/ditto_nation
                   </a>
                 </li>
-                <li>
+                <li className="">
                   <a
-                    className="hover:text-pink"
+                    className="hover:text-pink break-words"
                     href="https://t.me/+IXs8tD7D3lplNzA8"
                   >
                     https://t.me/+IXs8tD7D3lplNzA8
@@ -88,7 +88,7 @@ const About = () => {
               <h3 className="pt-2 underline underline-offset-2">Discord</h3>
 
               <a
-                className="hover:text-pink"
+                className="hover:text-pink break-words"
                 href="https://discord.com/invite/aTxX96uPFj "
               >
                 https://discord.com/invite/aTxX96uPFj{" "}
@@ -98,7 +98,7 @@ const About = () => {
               <h3 className="pt-2 underline underline-offset-2">Spotify</h3>
 
               <a
-                className="hover:text-pink"
+                className="hover:text-pink break-words"
                 href="https://open.spotify.com/user/0qjc53d1rlr3lnk9h4fsgbfol?si=pBufPh5HT1edu4i2QqSXew&nd=1"
               >
                 https://open.spotify.com/user/0qjc53d1rlr3lnk9h4fsgbfol?si=pBufPh5HT1edu4i2QqSXew&nd=1
@@ -110,7 +110,7 @@ const About = () => {
               </h3>
 
               <a
-                className="hover:text-pink"
+                className="hover:text-pink break-words"
                 href="https://www.twitter.com/ditto_nation "
               >
                 https://www.twitter.com/ditto_nation
@@ -121,7 +121,7 @@ const About = () => {
                 TikTok – I NEVER USE IT!
               </h3>
               <ol>
-                <li className="hover:text-pink">
+                <li className="hover:text-pink break-words">
                   <a href="https://www.tiktok.com/@ben_ditto_actual?_t=8VA5DbhX10v&_r=1">
                     https://www.tiktok.com/@ben_ditto_actual?_t=8VA5DbhX10v&_r=1
                   </a>
@@ -135,19 +135,19 @@ const About = () => {
             Interviews
           </h2>
           <ol>
-            <li className="hover:text-pink">
+            <li className="hover:text-pink break-words pb-2">
               <ExternalLink text=" https://www.interviewmagazine.com/culture/search-history-meet-ben-ditto-the-guy-meme-ing-his-way-through-war" />
             </li>
-            <li className="hover:text-pink">
+            <li className="hover:text-pink break-words pb-2">
               <ExternalLink text=" https://1granary.com/fashion-image/ben-ditto-on-hacking-nfts-and-the-future-of-image/" />
             </li>
-            <li className="hover:text-pink">
+            <li className="hover:text-pink break-words pb-2">
               <ExternalLink text=" https://www.batshittimes.com/ben-ditto-into-the-mouth-of-madness" />
             </li>
-            <li className="hover:text-pink">
+            <li className="hover:text-pink break-words pb-2">
               <ExternalLink text=" https://fnewsmagazine.com/2022/03/ben-dittos-ingenious-gaze/" />
             </li>
-            <li className="hover:text-pink">
+            <li className="hover:text-pink break-words">
               <ExternalLink text=" https://www.dezeen.com/2020/03/18/the-1975-birthday-party-ben-ditto-music-video/" />
             </li>
           </ol>
