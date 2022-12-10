@@ -36,7 +36,7 @@ const About = () => {
         </p>
       </section>
 
-      <section className="pt-8 px-4 max-w-8xl mx-auto grid md:grid-cols-2">
+      <section className="pt-8 px-4 max-w-8xl mx-auto md:grid md:grid-cols-2">
         <div className="mb-4">
           <h2 className="py-2 uppercase font-bold text-l lg:text-xl">
             Socials
