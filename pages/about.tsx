@@ -172,6 +172,17 @@ const About = () => {
           </h3>
           @ben_ditto
         </div>
+        <div>
+          <h2 className="py-2 uppercase font-bold text-l lg:text-xl">Web</h2>
+          <a
+            className="hover:text-pink break-words"
+            href="https://www.jason-andrew.com/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            https://www.jason-andrew.com/
+          </a>
+        </div>
       </section>
 
       <section className="px-4 mt-8 max-w-8xl">
