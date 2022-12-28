@@ -55,6 +55,7 @@ const ProductSingle: React.FC<IProps> = ({ product, context }) => {
       ) => {
         // queryClient.invalidateQueries(useCreateCartMutation.getKey());
         queryClient.invalidateQueries(useAddCartItemMutation.getKey());
+        queryClient.invalidateQueries(useGetCartItemCountQuery.getKey(null));
       },
       onError: () => {
         console.log(error);
