@@ -33,9 +33,9 @@ const ShowsPage = ({ data }) => {
                 <a target="_blank">
                   <article
                     key={idx}
-                    className="w-full py-6 px-8 text-2xl hover:bg-pink border-b border-black transition-all duration-200 ease-in-out"
+                    className="w-full py-6 px-8 text-2xl flex items-center justify-center hover:bg-pink border-b border-black transition-all duration-200 ease-in-out"
                   >
-                    <h2 className="uppercase font-bold">
+                    <h2 className="uppercase font-bold p-0">
                       {post.attributes.title}
                     </h2>
                     {/* <p>{post.attributes.content}</p> */}
