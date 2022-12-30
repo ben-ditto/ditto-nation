@@ -89,9 +89,9 @@ const About = () => {
 
               <a
                 className="hover:text-pink break-words"
-                href="https://discord.com/invite/aTxX96uPFj "
+                href="https://discord.gg/Mqd8FQP6SP"
               >
-                https://discord.com/invite/aTxX96uPFj{" "}
+                https://discord.gg/Mqd8FQP6SP
               </a>
             </li>
             <li>
