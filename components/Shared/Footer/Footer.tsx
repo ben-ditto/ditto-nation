@@ -132,7 +132,7 @@ const Footer = () => {
           className="px-4 teleFont text-xs font-bold !min-w-[70%] hover:text-pink cursor-pointer"
         >
           <a
-            href="https://discord.gg/Mqd8FQP6SP"
+            href="https://discord.gg/y5Ky7CBM"
             target="_blank"
             rel="noreferrer"
           >
