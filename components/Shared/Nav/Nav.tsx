@@ -1,7 +1,7 @@
 import { memo, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import nookies from "nookies";
+import nookies, { parseCookies } from "nookies";
 
 import clsx from "clsx";
 import useMedia from "lib/useMedia";
@@ -38,7 +38,10 @@ const Navigation: React.FC<IProps> = () => {
   const isDesktop = useMedia();
 
   const CHECKOUT_ID = "CHECKOUT_ID";
-  const checkoutId = nookies.get(null, CHECKOUT_ID).CHECKOUT_ID;
+
+  const cookies = parseCookies();
+
+  const checkoutId = cookies.CHECKOUT_ID;
 
   const { data, isLoading, error, isSuccess } = useGetCartItemCountQuery<
     GetCartItemCountQuery,

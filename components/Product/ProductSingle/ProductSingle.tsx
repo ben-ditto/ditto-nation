@@ -16,7 +16,7 @@ import {
   useGetCartQuery,
 } from "src/generated/graphql";
 
-import nookies from "nookies";
+import nookies, { parseCookies } from "nookies";
 import { useQueryClient } from "@tanstack/react-query";
 import { shopifyGraphqlRequestClient } from "src/lib/clients/graphqlRequestClient";
 
@@ -79,7 +79,9 @@ const ProductSingle: React.FC<IProps> = ({ product, context }) => {
         _variables: AddCartItemMutationVariables,
         _context: unknown
       ) => {
-        const checkoutId = nookies.get(context, CHECKOUT_ID).CHECKOUT_ID;
+        const checkoutId = nookies.get(context).CHECKOUT_ID;
+        const cookies = parseCookies();
+        console.log(cookies.CHECKOUT_ID, checkoutId);
         queryClient.invalidateQueries(useAddCartItemMutation.getKey());
         queryClient.invalidateQueries(
           useGetCartItemCountQuery.getKey({ checkoutId: checkoutId })
@@ -94,7 +96,10 @@ const ProductSingle: React.FC<IProps> = ({ product, context }) => {
 
   const addItemToCart = async (lineItem: CheckoutLineItemInput) => {
     try {
-      const checkoutId = nookies.get(context, CHECKOUT_ID).CHECKOUT_ID;
+      const checkoutId = nookies.get(context).CHECKOUT_ID;
+      const cookies = parseCookies();
+      console.log(cookies.CHECKOUT_ID, checkoutId);
+
       await mutateCartItemAsync({ checkoutId: checkoutId, lineItem: lineItem });
       // await ShopifyService.addCartItem({ checkoutId, lineItem });
       // console.log("worked, checkoutid:", checkoutId);

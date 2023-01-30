@@ -2,7 +2,7 @@ import { CheckoutCreatePayload } from "./../../src/generated/graphql";
 import { useState, useEffect } from "react";
 import { NextPageContext } from "next";
 import { shopifyGraphqlRequestClient } from "src/lib/clients/graphqlRequestClient";
-import nookies from "nookies";
+import nookies, { parseCookies } from "nookies";
 import formatTitle from "title";
 import { useQueryClient } from "@tanstack/react-query";
 import { gql } from "graphql-request";
@@ -72,7 +72,9 @@ export const useAddItem = async (
   // return {mutateCartItemAsync}
 
   try {
-    const checkoutId = nookies.get(context, CHECKOUT_ID).CHECKOUT_ID;
+    const cookies = parseCookies();
+
+    const checkoutId = cookies.CHECKOUT_ID;
     await mutateCartItemAsync({ checkoutId: checkoutId, lineItem: lineItem });
     // await ShopifyService.addCartItem({ checkoutId, lineItem });
   } catch (error) {
