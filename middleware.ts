@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { verifyAuth } from "src/lib/auth";
+import { verifyAuth } from "lib/auth";
 
 export async function middleware(req: NextRequest) {
   const token = req.cookies.get("admin-token")?.value;

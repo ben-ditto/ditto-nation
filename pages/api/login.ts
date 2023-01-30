@@ -5,7 +5,7 @@ import { nanoid } from "nanoid";
 import z from "zod";
 import cookie from "cookie";
 
-import { getJWTSecretKey } from "src/lib/auth";
+import { getJWTSecretKey } from "lib/auth";
 
 const schema = z.object({
   email: z.string().email(),
