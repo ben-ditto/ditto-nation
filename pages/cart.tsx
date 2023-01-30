@@ -8,7 +8,7 @@ import type {
   NextPageContext,
 } from "next";
 
-import nookies, { destroyCookie } from "nookies";
+import nookies, { destroyCookie, parseCookies } from "nookies";
 
 import { shopifyGraphqlRequestClient } from "src/lib/clients/graphqlRequestClient";
 
@@ -33,7 +33,9 @@ import {
 const CartPage = (context?: NextPageContext) => {
   const CHECKOUT_ID = "CHECKOUT_ID";
 
-  const checkoutId = nookies.get(context, CHECKOUT_ID).CHECKOUT_ID;
+  const cookies = parseCookies();
+
+  const checkoutId = cookies.CHECKOUT_ID;
 
   const { data, isLoading, error, isSuccess } = useGetCartQuery<
     GetCartQuery,
