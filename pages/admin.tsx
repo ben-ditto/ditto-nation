@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { useState } from "react";
 import { NextSeo } from "next-seo";
 import Link from "next/link";
 
@@ -9,8 +9,47 @@ import { getLayout } from "components/Layout/Layout";
 
 //Components
 import ExternalLink from "components/Shared/ExternalLink";
+import Button from "components/UI/Button";
 
 const About = () => {
+  const [imageSrc, setImageSrc] = useState<string | ArrayBuffer>();
+  const [uploadData, setUploadData] = useState();
+
+  /**
+   * handleOnChange
+   * @description Triggers when the file input changes (ex: when a file is selected)
+   */
+
+  function handleOnChange(changeEvent) {
+    const reader = new FileReader();
+
+    reader.onload = function (onLoadEvent) {
+      setImageSrc((prev) => onLoadEvent.target.result);
+      setUploadData(undefined);
+    };
+
+    reader.readAsDataURL(changeEvent.target.files[0]);
+  }
+
+  /**
+   * handleOnSubmit
+   * @description Triggers when the main form is submitted
+   */
+
+  async function handleOnSubmit(event) {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+    const fileInput = Array.from(form.elements).find(
+      ({ name }) => name === "file"
+    );
+
+    const formData = new FormData();
+
+    console.log(fileInput);
+    formData.append("upload_preset", "my-uploads");
+  }
+
   return (
     <>
       <NextSeo
@@ -31,18 +70,31 @@ const About = () => {
       </section>
 
       <section className="px-4 mt-8 max-w-8xl">
-        <ul className="flex gap-4 font-black ">
-          <li className=" hover:text-pink transition-all duration-150 ease-linear">
-            <Link href="/shipping">
-              <a>Shipping</a>
-            </Link>
-          </li>
-          <li className="hover:text-pink transition-all duration-150 ease-linear">
-            <Link href="/legal">
-              <a>Terms & Conditions</a>
-            </Link>
-          </li>
-        </ul>
+        <form method="post" onChange={handleOnChange} onSubmit={handleOnSubmit}>
+          <p>
+            <input type="file" name="file" />
+          </p>
+
+          {/* <img src={imageSrc} /> */}
+
+          {imageSrc && !uploadData && (
+            <p>
+              <Button
+                Component={"button"}
+                type="submit"
+                className="border uppercase text-sm border-black rounded-md px-2 py-1 shadow-xl md:shadow-none md:hover:shadow-xl transition-all duration-150 ease-in-out hover:bg-lime"
+              >
+                Upload Files
+              </Button>
+            </p>
+          )}
+
+          {uploadData && (
+            <code>
+              <pre>{JSON.stringify(uploadData, null, 2)}</pre>
+            </code>
+          )}
+        </form>
       </section>
     </>
   );
