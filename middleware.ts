@@ -2,6 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { verifyAuth } from "lib/auth";
 
+const isAdminRoute = (pathname: string) => {
+  return pathname.startsWith("/api/admin");
+};
+
 export async function middleware(req: NextRequest) {
   const token = req.cookies.get("admin-token")?.value;
 
@@ -13,6 +17,10 @@ export async function middleware(req: NextRequest) {
 
   if (req.nextUrl.pathname.startsWith("/login") && !verifiedToken) {
     return;
+  }
+
+  if (isAdminRoute(req.nextUrl.pathname) && !verifiedToken) {
+    return NextResponse.redirect(new URL("/api/auth/unauthorized", req.url));
   }
 
   const url = req.url;
@@ -27,5 +35,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin", "/login"],
+  matcher: ["/admin", "/login", "/api/admin/:path*"],
 };

@@ -7,8 +7,29 @@ import { patreonRequestClient } from "src/lib/clients/axiosClient";
 //Layout
 import { getLayout } from "components/Layout/Layout";
 
+type SHOW = {
+  id: string;
+  type: string;
+  attributes: {
+    content: string;
+    title: string;
+    url: string;
+  };
+};
+
 const ShowsPage = ({ data }) => {
-  const posts = data.postData.data;
+  const posts = data.postData.data as SHOW[];
+
+  const PATTERN = "DITTO NATION",
+    filtered = posts.filter((str: any) => {
+      return str.attributes.title.includes(PATTERN);
+    });
+
+  filtered.sort(function (a, b) {
+    return parseFloat(b.id) - parseFloat(a.id);
+  });
+
+  console.log("shows", posts);
 
   return (
     <>
@@ -22,8 +43,8 @@ const ShowsPage = ({ data }) => {
         }}
       />
       <div className="absolute top-0 left-0 !w-screen">
-        {posts.length > 0 ? (
-          posts.map((post, idx) => {
+        {filtered.length > 0 ? (
+          filtered.map((post, idx) => {
             return (
               <Link
                 key={idx}
@@ -55,8 +76,6 @@ const ShowsPage = ({ data }) => {
 ShowsPage.getLayout = getLayout;
 
 export const getStaticProps = async () => {
-  const queryClient = new QueryClient();
-
   const res = await patreonRequestClient.get(
     `https://www.patreon.com/api/oauth2/v2/campaigns/6702424/posts?fields${encodeURIComponent(
       "[post]"
