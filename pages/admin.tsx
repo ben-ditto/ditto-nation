@@ -1,54 +1,30 @@
 import React, { useState } from "react";
 import { NextSeo } from "next-seo";
 import Link from "next/link";
+import axios from "axios";
 
 import { dehydrate, QueryClient } from "@tanstack/react-query";
+import { UiFileInputButton } from "components/Upload/UiFileInput";
 
 //Layout
 import { getLayout } from "components/Layout/Layout";
 
-//Components
-import ExternalLink from "components/Shared/ExternalLink";
-import Button from "components/UI/Button";
-
-const About = () => {
-  const [imageSrc, setImageSrc] = useState<string | ArrayBuffer>();
-  const [uploadData, setUploadData] = useState();
-
-  /**
-   * handleOnChange
-   * @description Triggers when the file input changes (ex: when a file is selected)
-   */
-
-  function handleOnChange(changeEvent) {
-    const reader = new FileReader();
-
-    reader.onload = function (onLoadEvent) {
-      setImageSrc((prev) => onLoadEvent.target.result);
-      setUploadData(undefined);
+const Admin = () => {
+  const onChange = async (formData: any) => {
+    const config = {
+      headers: { "content-type": "multipart/form-data" },
+      onUploadProgress: (event) => {
+        console.log(
+          `Current progress:`,
+          Math.round((event.loaded * 100) / event.total)
+        );
+      },
     };
 
-    reader.readAsDataURL(changeEvent.target.files[0]);
-  }
+    const response = await axios.post("/api/admin/file", formData, config);
 
-  /**
-   * handleOnSubmit
-   * @description Triggers when the main form is submitted
-   */
-
-  async function handleOnSubmit(event) {
-    event.preventDefault();
-
-    const form = event.currentTarget;
-    const fileInput = Array.from(form.elements).find(
-      ({ name }) => name === "file"
-    );
-
-    const formData = new FormData();
-
-    console.log(fileInput);
-    formData.append("upload_preset", "my-uploads");
-  }
+    console.log("response", response.data);
+  };
 
   return (
     <>
@@ -70,39 +46,19 @@ const About = () => {
       </section>
 
       <section className="px-4 mt-8 max-w-8xl">
-        <form method="post" onChange={handleOnChange} onSubmit={handleOnSubmit}>
-          <p>
-            <input type="file" name="file" />
-          </p>
-
-          {/* <img src={imageSrc} /> */}
-
-          {imageSrc && !uploadData && (
-            <p>
-              <Button
-                Component={"button"}
-                type="submit"
-                className="border uppercase text-sm border-black rounded-md px-2 py-1 shadow-xl md:shadow-none md:hover:shadow-xl transition-all duration-150 ease-in-out hover:bg-lime"
-              >
-                Upload Files
-              </Button>
-            </p>
-          )}
-
-          {uploadData && (
-            <code>
-              <pre>{JSON.stringify(uploadData, null, 2)}</pre>
-            </code>
-          )}
-        </form>
+        <UiFileInputButton
+          label="Upload Single File"
+          uploadFileName="theFiles"
+          onChange={onChange}
+        />
       </section>
     </>
   );
 };
 
-About.getLayout = getLayout;
+Admin.getLayout = getLayout;
 
-export default About;
+export default Admin;
 
 export const getStaticProps = async () => {
   const queryClient = new QueryClient();
