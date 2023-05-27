@@ -20,10 +20,11 @@ type SHOW = {
 const ShowsPage = ({ data }) => {
   const posts = data.postData.data as SHOW[];
 
-  const PATTERN = "DITTO NATION",
-    filtered = posts.filter((str: any) => {
-      return str.attributes.title.includes(PATTERN);
-    });
+  const PATTERN1 = "DITTO NATION";
+  const PATTERN2 = "Ditto Nation";
+  const filtered = posts.filter((str: any) => {
+    return str.attributes.title.includes(PATTERN1 || PATTERN2);
+  });
 
   filtered.sort(function (a, b) {
     return parseFloat(b.id) - parseFloat(a.id);
