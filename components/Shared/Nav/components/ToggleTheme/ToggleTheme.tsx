@@ -17,11 +17,11 @@ const ToggleTheme = () => {
         onClick={toggleThemeHandler}
         className={clsx(
           "w-11 h-6 bg-transparent rounded-full after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all border border-textbase",
-          theme === "dark" &&
+          theme === "light" &&
             "pointer-events-none after:-translate-x-full rtl:after:-translate-x-full after:bg-black"
         )}
       ></button>
-      {/* <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">
+      {/* <span className="ms-3 text-sm font-medium text-textbase dark:text-gray-300">
         {theme}
       </span> */}
     </label>
