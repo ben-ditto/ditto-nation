@@ -1,36 +1,5 @@
 :root {
 
-  --primary: #000000;
-  --primary-2: #111;
-  --secondary: #ffffff;
-  --secondary-2: #f1f3f5;
-  --hover: rgba(255, 255, 255, 0.075);
-  --hover-1: rgba(255, 255, 255, 0.15);
-  --hover-2: rgba(255, 255, 255, 0.25);
-  --selection: var(--purple);
-
-  --text-base: white;
-  --text-primary: white;
-  --text-secondary: black;
-
-   --lime: #ADFF00;
-
-  --accent-0: #fff;
-  --accent-1: #fafafa;
-  --accent-2: var(--lime);
-  --accent-3: #999999;
-  --accent-4: #888888;
-  --accent-5: #666666;
-  --accent-6: #444444;
-  --accent-7: #333333;
-  --accent-8: #111111;
-  --accent-9: #000;
-
-  --font-sans: "Edu Favorit", -apple-system, system-ui, BlinkMacSystemFont, 'Helvetica Neue',
-    'Helvetica', sans-serif;
-}
-
-[data-theme='dark'] {
   --primary: #ffffff;
   --primary-2: #f1f3f5;
   --secondary: #000000;
@@ -56,6 +25,39 @@
   --accent-2: #333333;
   --accent-1: #111111;
   --accent-0: #000;
+
+
+  --font-sans: "Edu Favorit", -apple-system, system-ui, BlinkMacSystemFont, 'Helvetica Neue',
+    'Helvetica', sans-serif;
+}
+
+[data-theme='dark'] {
+
+  --primary: #000000;
+  --primary-2: #111;
+  --secondary: #ffffff;
+  --secondary-2: #f1f3f5;
+  --hover: rgba(255, 255, 255, 0.075);
+  --hover-1: rgba(255, 255, 255, 0.15);
+  --hover-2: rgba(255, 255, 255, 0.25);
+  --selection: var(--purple);
+
+  --text-base: white;
+  --text-primary: white;
+  --text-secondary: black;
+
+   --lime: #ADFF00;
+
+  --accent-0: #fff;
+  --accent-1: #fafafa;
+  --accent-2: var(--lime);
+  --accent-3: #999999;
+  --accent-4: #888888;
+  --accent-5: #666666;
+  --accent-6: #444444;
+  --accent-7: #333333;
+  --accent-8: #111111;
+  --accent-9: #000;
 }
 
 *,
