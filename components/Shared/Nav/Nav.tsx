@@ -90,19 +90,19 @@ const Navigation: React.FC<IProps> = () => {
             <span
               className={clsx(
                 displayMenu ? "" : "-translate-y-0.5",
-                "block w-6  h-[0.2rem] bg-black transform transition duration-300 ease-in-out"
+                "block w-6  h-[0.2rem] bg-textbase transform transition duration-300 ease-in-out"
               )}
             ></span>
             <span
               className={clsx(
                 displayMenu && "opacity-0",
-                "block w-6 h-[0.2rem] bg-black transform transition duration-300 ease-in-out"
+                "block w-6 h-[0.2rem] bg-textbase transform transition duration-300 ease-in-out"
               )}
             ></span>
             <span
               className={clsx(
                 displayMenu ? "" : "translate-y-0.5",
-                "block w-6 h-[0.2rem] bg-black transform transition duration-300 ease-in-out"
+                "block w-6 h-[0.2rem] bg-textbase transform transition duration-300 ease-in-out"
               )}
             ></span>
           </div>
