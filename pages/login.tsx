@@ -90,7 +90,7 @@ const Login = () => {
               required
               value={input.email}
               onChange={handleChange}
-              className="border border-black px-2 py-1 shadow-xl md:shadow-none md:hover:shadow-xl "
+              className="border border-textbase px-2 py-1 shadow-xl md:shadow-none md:hover:shadow-xl "
             />
             <input
               name="password"
@@ -99,7 +99,7 @@ const Login = () => {
               required
               value={input.password}
               onChange={handleChange}
-              className="border border-black px-2 py-1 shadow-xl md:shadow-none md:hover:shadow-xl "
+              className="border border-textbase px-2 py-1 shadow-xl md:shadow-none md:hover:shadow-xl "
             />
 
             <Button
@@ -108,7 +108,7 @@ const Login = () => {
               value=""
               name="subscribe"
               loading={isLoading}
-              className="border uppercase text-sm border-black rounded-md px-2 py-1 shadow-xl md:shadow-none md:hover:shadow-xl transition-all duration-150 ease-in-out hover:bg-lime"
+              className="border uppercase text-sm border-textbase rounded-md px-2 py-1 shadow-xl md:shadow-none md:hover:shadow-xl transition-all duration-150 ease-in-out hover:bg-lime"
             >
               {isLoading ? "logging in" : "log in"}
             </Button>

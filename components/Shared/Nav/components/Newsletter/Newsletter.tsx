@@ -10,6 +10,7 @@ import clsx from "clsx";
 
 //Components
 import Button from "components/UI/Button";
+import ToggleTheme from "../ToggleTheme/ToggleTheme";
 
 const Newsletter = () => {
   const inputRef = useRef(null);
@@ -52,7 +53,7 @@ const Newsletter = () => {
     <div
       className={clsx(
         !show && "opacity-0",
-        "absolute w-full flex justify-between items-center z-50 bg-white py-4 px-4 md:px-6 xl:px-8 border-b border-black"
+        "absolute w-full flex justify-between items-center z-50 bg-primary py-4 px-4 md:px-6 xl:px-8 border-b border-textbase"
       )}
     >
       <form onSubmit={handleSubmit}>
@@ -69,7 +70,7 @@ const Newsletter = () => {
           required
           autoCapitalize="off"
           autoCorrect="off"
-          className="border border-black text-sm rounded-md px-2 py-1 shadow-xl md:shadow-none md:hover:shadow-xl mr-4"
+          className="border border-textbase text-sm rounded-md px-2 py-1 shadow-xl md:shadow-none md:hover:shadow-xl mr-4"
         />
 
         <Button
@@ -78,7 +79,7 @@ const Newsletter = () => {
           value=""
           name="subscribe"
           loading={isLoading}
-          className="border uppercase text-sm border-black rounded-md px-2 py-1 shadow-xl md:shadow-none md:hover:shadow-xl transition-all duration-150 ease-in-out hover:bg-lime"
+          className="border uppercase text-sm border-textbase rounded-md px-2 py-1 shadow-xl md:shadow-none md:hover:shadow-xl transition-all duration-150 ease-in-out hover:bg-lime"
         >
           {isLoading ? "signing up" : "sign up"}
         </Button>
@@ -94,6 +95,8 @@ const Newsletter = () => {
           {/* {JSON.stringify(error)} */}
         </span>
       )}
+
+      <ToggleTheme />
     </div>
   );
 };

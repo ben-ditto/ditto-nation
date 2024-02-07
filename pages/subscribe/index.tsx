@@ -26,6 +26,12 @@ const SubscribePage = ({ data }) => {
   //   { initialData: data }
   // );
 
+  const { tierData } = data;
+
+  if (!tierData) return null;
+
+  console.log("tiers", tierData);
+
   return (
     <>
       <NextSeo
@@ -38,32 +44,34 @@ const SubscribePage = ({ data }) => {
           url: "https://www.ditto-nation.com/subscribe",
         }}
       />
-      <div className="grid-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 mx-auto px-2 lg:px-6 max-w-8xl">
-        {data.tierData.map((tier, idx: number) => {
+      <div className="grid-container grid grid-cols-1 items-stretch md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 mx-auto px-2 lg:px-6 max-w-8xl">
+        {data.tierData.map((tier: any, idx: number) => {
           return (
             <Link
-              key={idx}
+              key={tier.id}
               passHref
               href={`https://patreon.com${tier.attributes.url}`}
             >
               <a target="_blank">
                 <article
                   key={idx}
-                  className="relative shadow-xl lg:shadow-none lg:hover:shadow-xl rounded-md border border-black overflow-hidden transition-all duration-200 ease-in-out"
+                  className="relative h-full shadow-xl lg:shadow-none lg:hover:shadow-xl rounded-md border border-textbase overflow-hidden transition-all duration-200 ease-in-out"
                 >
-                  <Image
-                    src={tier.attributes.image_url}
-                    alt={tier.attributes.title}
-                    width={500}
-                    height={500}
-                    sizes="(max-width: 768px) 100vw,
+                  {tier.attributes.image_url && (
+                    <Image
+                      src={tier.attributes.image_url}
+                      alt={tier.attributes.title}
+                      width={500}
+                      height={500}
+                      sizes="(max-width: 768px) 100vw,
               (max-width: 1200px) 50vw,
               33vw"
-                    style={{ objectFit: "cover", width: "100%" }}
-                    blurDataURL={tier.attributes.image_url}
-                    placeholder="blur" // Optional blur-up while loading
-                    className="rounded-t-md"
-                  />
+                      style={{ objectFit: "cover", width: "100%" }}
+                      blurDataURL={tier.attributes.image_url}
+                      placeholder="blur" // Optional blur-up while loading
+                      className="rounded-t-md"
+                    />
+                  )}
                   <div className="px-4 max-w-[500px]">
                     <h2 className="whitespace-normal m-0 py-2 pr-2 font-bold">
                       {tier.attributes.title}:{" "}
@@ -74,7 +82,7 @@ const SubscribePage = ({ data }) => {
                         dangerouslySetInnerHTML={{
                           __html: tier.attributes.description as string,
                         }}
-                        className="pb-2 md:pb-4"
+                        className="pb-2 md:pb-4 !m-0 !bg-transparent"
                       ></div>
                     )}
                   </div>
@@ -99,13 +107,15 @@ export const getStaticProps = async () => {
 
   const tierData = tierRes.data;
 
+  // console.log("data", tierData.included);
+
   return {
     props: {
       data: {
         tierData: tierData.included,
       },
     },
-    revalidate: 1, // In seconds
+    revalidate: 60, // In seconds
   };
 };
 

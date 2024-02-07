@@ -129,7 +129,7 @@ export const CartItem: React.FC<IProps> = ({ item, checkoutId }) => {
     >
       <div className="flex flex-row items-center space-x-4 py-4">
         <div className="w-16 h-16 relative overflow-hidden cursor-pointer z-0">
-          <Link href={`/products/${item.variant.product.handle}`}>
+          <Link href={`/shop/${item.variant.product.handle}`}>
             <a>
               <Image
                 className={s.productImage}
@@ -143,7 +143,7 @@ export const CartItem: React.FC<IProps> = ({ item, checkoutId }) => {
           </Link>
         </div>
         <div className="flex-1 flex flex-col text-base">
-          <Link href={`/products/${item.variant.product.handle}`}>
+          <Link href={`/shop/${item.variant.product.handle}`}>
             <a>
               <span className={s.productName}>{item.title}</span>
             </a>

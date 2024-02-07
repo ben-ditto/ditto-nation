@@ -1,12 +1,12 @@
 .root {
   @apply cursor-pointer inline-flex transition ease-in-out duration-150
   text-center justify-center uppercase
-  border border-black items-center text-sm;
+  border border-textbase items-center text-sm;
   max-height: 64px;
 }
 
 .root:hover {
-  @apply border-accent-6;
+  @apply bg-lime border-accent-6 text-secondary;
 }
 
 .root:focus {
@@ -30,7 +30,7 @@
 }
 
 .ghost:hover {
-  @apply border-accent-9 bg-accent-9 text-accent-0;
+  @apply border-accent-9 bg-lime text-secondary;
 }
 
 .naked {
@@ -39,7 +39,7 @@
 
 .naked:hover,
 .naked:focus {
-  @apply bg-transparent border-none;
+  @apply bg-lime border-none text-secondary;
 }
 
 .disabled,

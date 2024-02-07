@@ -50,13 +50,13 @@ export default function ProductsPage() {
   return (
     <>
       <NextSeo
-        title={"All Products"}
+        title={"Shop"}
         description={"Display All Products"}
         openGraph={{
           type: "website",
-          title: "All Products",
+          title: "Shop",
           description: "Display All Products",
-          url: "https://www.ditto-nation.com/products",
+          url: "https://www.ditto-nation.com/shop",
         }}
       />
 

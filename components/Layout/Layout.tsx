@@ -41,7 +41,7 @@ const Layout: React.FC<IProps> = ({ main }) => {
         title={`This site uses cookies to improve your experience. By clicking, you agree to our terms and Conditions
         `}
         hide={acceptedCookies}
-        className="border-t border-black"
+        className="border-t border-textbase"
         action={
           <Button
             className="rounded-md px-1 py-1 md:max-w-xs hover:bg-accent-2"

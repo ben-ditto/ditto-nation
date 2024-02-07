@@ -71,9 +71,9 @@ const ProductGrid: React.FC<IProps> = ({ productData }) => {
                 return (
                   <article
                     key={`product-${product?.id}-${idx}`}
-                    className="shadow-xl lg:shadow-none lg:hover:shadow-xl rounded-md border border-black overflow-hidden transition-all duration-200 ease-in-out"
+                    className="shadow-xl lg:shadow-none lg:hover:shadow-xl rounded-md border border-textbase overflow-hidden transition-all duration-200 ease-in-out"
                   >
-                    <Link href={`/products/${product.handle}`}>
+                    <Link href={`/shop/${product.handle}`}>
                       <a>
                         {productImage && (
                           <Image
@@ -87,7 +87,7 @@ const ProductGrid: React.FC<IProps> = ({ productData }) => {
                           />
                         )}
 
-                        <div className="grid grid-cols-4 max-w-[500px] bg-white text-black font-bold uppercase px-4 py-2">
+                        <div className="grid grid-cols-4 max-w-[500px] bg-primary text-primary font-bold uppercase px-4 py-2">
                           <div className="col-span-3">
                             {product.title && (
                               <h2 className="whitespace-normal m-0 p-0 pr-2">
@@ -96,7 +96,7 @@ const ProductGrid: React.FC<IProps> = ({ productData }) => {
                             )}
                           </div>
 
-                          <div className="col-span-1 border-none border-black flex items-center justify-end">
+                          <div className="col-span-1 border-none border-textbase flex items-center justify-end">
                             {product.priceRange.maxVariantPrice && (
                               <h2 className="whitespace-normal m-0 p-0">
                                 {formatPrice({

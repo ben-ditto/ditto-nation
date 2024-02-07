@@ -1,20 +1,23 @@
 :root {
-  --primary: #ffffff;
-  --primary-2: #f1f3f5;
-  --secondary: #000000;
-  --secondary-2: #111;
 
-  --text-base: #000000;
-  --text-primary: #000000;
-  --text-secondary: white;
+  --primary: #000000;
+  --primary-2: #111;
+  --secondary: #ffffff;
+  --secondary-2: #f1f3f5;
+  --hover: rgba(255, 255, 255, 0.075);
+  --hover-1: rgba(255, 255, 255, 0.15);
+  --hover-2: rgba(255, 255, 255, 0.25);
+  --selection: var(--purple);
 
-  --hover: rgba(0, 0, 0, 0.075);
-  --hover-1: rgba(0, 0, 0, 0.15);
-  --hover-2: rgba(0, 0, 0, 0.25);
+  --text-base: white;
+  --text-primary: white;
+  --text-secondary: black;
+
+   --lime: #ADFF00;
 
   --accent-0: #fff;
   --accent-1: #fafafa;
-  --accent-2: #eaeaea;
+  --accent-2: var(--lime);
   --accent-3: #999999;
   --accent-4: #888888;
   --accent-5: #666666;
@@ -28,18 +31,18 @@
 }
 
 [data-theme='dark'] {
-  --primary: #000000;
-  --primary-2: #111;
-  --secondary: #ffffff;
-  --secondary-2: #f1f3f5;
-  --hover: rgba(255, 255, 255, 0.075);
-  --hover-1: rgba(255, 255, 255, 0.15);
-  --hover-2: rgba(255, 255, 255, 0.25);
-  --selection: var(--purple);
+  --primary: #ffffff;
+  --primary-2: #f1f3f5;
+  --secondary: #000000;
+  --secondary-2: #111;
 
-  --text-base: white;
-  --text-primary: white;
-  --text-secondary: black;
+  --text-base: #000000;
+  --text-primary: #000000;
+  --text-secondary: #000000;
+
+  --hover: rgba(0, 0, 0, 0.075);
+  --hover-1: rgba(0, 0, 0, 0.15);
+  --hover-2: rgba(0, 0, 0, 0.25);
 
   --lime: #ADFF00
 
@@ -97,6 +100,12 @@ body {
 
 a {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+mark {
+  padding: 0;
+  background-color: transparent !important;
+  color: var(--text-primary);
 }
 
 /* .teleFont {

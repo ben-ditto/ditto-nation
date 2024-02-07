@@ -89,9 +89,7 @@ export async function getStaticPaths() {
   );
 
   return {
-    paths: products.nodes.map(
-      (product: Product) => `/products/${product.handle}`
-    ),
+    paths: products.nodes.map((product: Product) => `/shop/${product.handle}`),
     fallback: "blocking",
   };
 }

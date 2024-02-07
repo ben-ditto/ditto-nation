@@ -28,7 +28,7 @@ interface IProps {
 }
 
 const links = [
-  { href: "/products", text: "products" },
+  { href: "/shop", text: "shop" },
   { href: "/subscribe", text: "subscribe" },
   { href: "/shows", text: "shows" },
   { href: "/about", text: "about" },
@@ -62,7 +62,7 @@ const Navigation: React.FC<IProps> = () => {
 
   return (
     <nav className="fixed z-50 top-0 left-0 w-screen">
-      <div className="bg-white z-20 py-4 px-4 md:px-6 xl:px-8 border-b border-black relative flex justify-between items-center">
+      <div className="bg-primary z-20 py-4 px-4 md:px-6 xl:px-8 border-b border-textbase relative flex justify-between items-center">
         {isDesktop ? (
           <div>
             <ul className="flex last:m-0">
@@ -139,14 +139,14 @@ const Navigation: React.FC<IProps> = () => {
           displayMenu
             ? "translate-y-full opacity-100"
             : "-translate-y-full opacity-100",
-          "flex drop-shadow-sm overflow-x-scroll justify-between bg-white py-4 px-4 md:px-6 xl:px-8 lg:hidden border-b border-black transition-all duration-300 ease-in-out"
+          "flex drop-shadow-sm overflow-x-scroll justify-between bg-primary py-4 px-4 md:px-6 xl:px-8 lg:hidden border-b border-textbase transition-all duration-300 ease-in-out"
         )}
       >
-        <Link href={`/products`}>
+        <Link href={`/shop`}>
           <a>
             <NavButton
-              text="Products"
-              isActive={router.pathname.startsWith("/products")}
+              text="Shop"
+              isActive={router.pathname.startsWith("/shop")}
             />
           </a>
         </Link>
