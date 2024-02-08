@@ -5,9 +5,11 @@ import { shopifyGraphqlRequestClient } from "src/lib/clients/graphqlRequestClien
 
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 
-import { getLayout } from "components/Layout/Layout";
-
 import { useGetShopInfoQuery, GetShopInfoQuery } from "src/generated/graphql";
+
+//components
+import { getLayout } from "components/Layout/Layout";
+import StarSpinner from "components/UI/StarSpinner/StarSpinner";
 
 export default function Home() {
   const { isLoading, error, data } = useGetShopInfoQuery<
@@ -40,6 +42,8 @@ export default function Home() {
           ],
         }}
       />
+
+      <StarSpinner />
       <div
         style={{
           backgroundImage:

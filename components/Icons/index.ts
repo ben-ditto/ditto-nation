@@ -4,3 +4,4 @@ export { default as Cross } from "./Cross";
 export { default as Patreon } from "./Patreon";
 export { default as Instagram } from "./Instagram";
 export { default as Telegram } from "./Telegram";
+export { default as Star } from "./Star";
