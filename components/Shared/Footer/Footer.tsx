@@ -75,7 +75,7 @@ const Footer = () => {
   }, [list]);
 
   return (
-    <footer className="fixed bottom-0 left-0 z-40 w-screen bg-textbase text-secondary border-t border-textbase grid grid-cols-[auto_auto] items-center">
+    <footer className="fixed bottom-0 left-0 z-40 w-screen bg-black text-white border-t border-textbase grid grid-cols-[auto_auto] items-center">
       <div className="flex border-r border-r-textbase p-2">
         <button className="hover:opacity-80 mr-2">
           <a

@@ -182,7 +182,7 @@ const ProductSingle: React.FC<IProps> = ({ product, context }) => {
               });
             }}
             // loading={createCartLoading && !isLoading}
-            className="rounded-md py-3 mt-3 bg-textbase text-black md:max-w-xs hover:bg-accent-7"
+            className="rounded-md py-3 mt-3 bg-textbase text-secondary md:max-w-xs hover:bg-accent-7"
           >
             Buy Now
           </Button>
