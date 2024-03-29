@@ -10,7 +10,7 @@ const StarSpinner = () => {
           <div className="animate-spin-slow hover:animate-none text-lime rotate-45">
             <Star />
           </div>
-          <h2 className="m-0 p-0 px-1 bg-white pointer-events-none font-bold leading-none text-xl uppercase text-black absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 -rotate-[22deg]">
+          <h2 className="m-0 p-0 px-1 bg-transparent pointer-events-none font-bold italic leading-none text-xl uppercase text-black absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 -rotate-[12deg]">
             shop
             <br />
             now
