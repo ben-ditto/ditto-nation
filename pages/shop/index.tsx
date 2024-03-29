@@ -1,4 +1,7 @@
+"use client";
+
 import { useRouter } from "next/router";
+import { redirect } from "next/navigation";
 import { shopifyGraphqlRequestClient } from "src/lib/clients/graphqlRequestClient";
 import { NextSeo } from "next-seo";
 
@@ -12,6 +15,8 @@ import {
   Product,
   GetAllProductsQuery,
   useGetAllProductsQuery,
+  useGetCollectionByHandleQuery,
+  useInfiniteGetCollectionByHandleQuery,
   useInfiniteGetAllProductsQuery,
   useGetShopInfoQuery,
 } from "src/generated/graphql";
@@ -19,19 +24,42 @@ import {
 export default function ProductsPage() {
   const router = useRouter();
 
+  // const { isLoading, error, data, isSuccess, fetchNextPage, hasNextPage } =
+  //   useInfiniteGetAllProductsQuery<GetAllProductsQuery, Error>(
+  //     "after",
+  //     shopifyGraphqlRequestClient,
+  //     {
+  //       after: null,
+  //     },
+  //     {
+  //       // initialData: ,
+  //       getNextPageParam: (lastPage, allPages) => {
+  //         if (lastPage.products.pageInfo.hasNextPage) {
+  //           return {
+  //             after: lastPage.products.pageInfo.endCursor,
+  //           };
+  //         }
+  //       },
+  //       onSuccess: () => {
+  //         console.log(Date.now(), "Fetching products succeed");
+  //       },
+  //     }
+  //   );
+
   const { isLoading, error, data, isSuccess, fetchNextPage, hasNextPage } =
-    useInfiniteGetAllProductsQuery<GetAllProductsQuery, Error>(
+    useInfiniteGetCollectionByHandleQuery<GetAllProductsQuery, Error>(
       "after",
       shopifyGraphqlRequestClient,
       {
+        handle: "frontpage",
         after: null,
       },
       {
         // initialData: ,
         getNextPageParam: (lastPage, allPages) => {
-          if (lastPage.products.pageInfo.hasNextPage) {
+          if (lastPage.collection.products.pageInfo.hasNextPage) {
             return {
-              after: lastPage.products.pageInfo.endCursor,
+              after: lastPage.collection.products.pageInfo.endCursor,
             };
           }
         },
@@ -73,6 +101,17 @@ export const getStaticProps = async () => {
   await queryClient.prefetchInfiniteQuery(
     useInfiniteGetAllProductsQuery.getKey({ after: null }),
     useGetAllProductsQuery.fetcher(shopifyGraphqlRequestClient, { after: null })
+  );
+
+  await queryClient.prefetchInfiniteQuery(
+    useInfiniteGetCollectionByHandleQuery.getKey({
+      handle: "frontpage",
+      after: null,
+    }),
+    useGetCollectionByHandleQuery.fetcher(shopifyGraphqlRequestClient, {
+      handle: "frontpage",
+      after: null,
+    })
   );
 
   await queryClient.prefetchQuery(

@@ -42,11 +42,11 @@ fragment PaginatedProductList on ProductConnection {
           name
           value
         }
-        priceV2 {
+        price {
           amount
           currencyCode
         }
-        compareAtPriceV2 {
+        compareAtPrice {
           amount
           currencyCode
         }
@@ -98,6 +98,17 @@ fragment PaginatedProductList on ProductConnection {
 query GetAllProducts($after: String) {
   products(first: 20, sortKey: CREATED_AT, reverse: true, after: $after) {
     ...PaginatedProductList
+  }
+}
+
+query GetCollectionByHandle($handle: String!, $after: String) {
+  collection(handle: $handle) {
+    id
+    handle
+
+    products(first: 20, sortKey: CREATED, reverse: true, after: $after) {
+      ...PaginatedProductList
+    }
   }
 }
 

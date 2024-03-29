@@ -13,8 +13,10 @@ import { shopifyGraphqlRequestClient } from "src/lib/clients/graphqlRequestClien
 import {
   Product,
   GetAllProductsQuery,
+  GetCollectionByHandleQuery,
   useGetAllProductsQuery,
   useInfiniteGetAllProductsQuery,
+  useInfiniteGetCollectionByHandleQuery,
 } from "src/generated/graphql";
 
 import Loader from "components/UI/Loader";
@@ -22,15 +24,15 @@ import Loader from "components/UI/Loader";
 import { formatPrice } from "lib/shopify/usePrice";
 
 interface IProps {
-  productData: InfiniteData<GetAllProductsQuery>;
+  productData: InfiniteData<GetCollectionByHandleQuery>;
   fetchNextPage?: (
     options?: FetchNextPageOptions
-  ) => Promise<InfiniteQueryObserverResult<GetAllProductsQuery, Error>>;
+  ) => Promise<InfiniteQueryObserverResult<GetCollectionByHandleQuery, Error>>;
 }
 
 const ProductGrid: React.FC<IProps> = ({ productData }) => {
   const { isLoading, error, data, isSuccess, fetchNextPage, hasNextPage } =
-    useInfiniteGetAllProductsQuery<GetAllProductsQuery, Error>(
+    useInfiniteGetAllProductsQuery<GetCollectionByHandleQuery, Error>(
       "after",
       shopifyGraphqlRequestClient,
       {
@@ -66,7 +68,7 @@ const ProductGrid: React.FC<IProps> = ({ productData }) => {
         <div className="grid-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 mx-auto px-2 lg:px-6 max-w-8xl">
           {productData?.pages?.map((page, idx) => (
             <React.Fragment key={`page-${page.__typename}-${idx}`}>
-              {page?.products?.nodes.map((product, idx) => {
+              {page?.collection!.products?.nodes.map((product, idx) => {
                 const productImage = product?.featuredImage || null;
                 return (
                   <article

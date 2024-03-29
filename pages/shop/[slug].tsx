@@ -1,5 +1,8 @@
+"use client";
+
 import React from "react";
 import { useRouter } from "next/router";
+import { redirect } from "next/navigation";
 import type { GetStaticPropsContext, NextPageContext } from "next";
 
 import { gql } from "graphql-request";
