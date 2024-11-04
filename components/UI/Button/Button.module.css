@@ -6,7 +6,7 @@
 }
 
 .root:hover {
-  @apply bg-lime border-accent-6 text-secondary;
+  @apply bg-lime border-accent-6 text-black;
 }
 
 .root:focus {

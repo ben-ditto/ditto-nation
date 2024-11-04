@@ -70,7 +70,7 @@ const Newsletter = () => {
           required
           autoCapitalize="off"
           autoCorrect="off"
-          className="border border-textbase text-sm rounded-md px-2 py-1 shadow-xl md:shadow-none md:hover:shadow-xl mr-4"
+          className=" text-black border border-textbase text-sm rounded-md px-2 py-1 shadow-xl md:shadow-none md:hover:shadow-xl mr-4"
         />
 
         <Button
