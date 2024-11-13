@@ -11,7 +11,7 @@ const submitter = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   try {
-    const ACCESS_TOKEN = process.env.NEXT_PUBLIC_SHOPIFY_ADMIN_ACCESS_TOKEN;
+    const ACCESS_TOKEN = process.env.SHOPIFY_ADMIN_ACCESS_TOKEN;
     const DOMAIN = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN;
     const mutation = gql`
       mutation createCustomer($email: String!) {
