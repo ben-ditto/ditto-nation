@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://ditto-nation.vercel.app/
+
+# Sitemaps
+Sitemap: https://ditto-nation.vercel.app/sitemap.xml
