@@ -168,9 +168,7 @@ const ProductSingle: React.FC<IProps> = ({ product, context }) => {
           disabled={product?.availableForSale === false}
           className="rounded-md py-3 md:max-w-xs hover:bg-accent-2"
         >
-          {product?.availableForSale === false
-            ? "Not Available"
-            : "Add To Cart"}
+          {product?.availableForSale === false ? "Sold Out" : "Add To Cart"}
         </Button>
 
         {product?.availableForSale && (
