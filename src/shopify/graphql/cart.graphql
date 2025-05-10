@@ -50,6 +50,46 @@ query getCart($checkoutId: ID!) {
   }
 }
 
+query getCartUsingCartApi($cartId: ID!) {
+  cart(id: $cartId) {
+    id
+    createdAt
+    updatedAt
+    lines(first: 250) {
+      edges {
+        node {
+          id
+          quantity
+          merchandise {
+            ... on ProductVariant {
+              id
+              title
+              product {
+                handle
+              }
+              priceV2 {
+                amount
+                currencyCode
+              }
+              image {
+                altText
+                url(
+                  transform: {
+                    preferredContentType: JPG
+                    crop: CENTER
+                    maxWidth: 768
+                    maxHeight: 1024
+                  }
+                )
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 query getCartItemCount($checkoutId: ID!) {
   node(id: $checkoutId) {
     ... on Checkout {
@@ -65,6 +105,12 @@ query getCartItemCount($checkoutId: ID!) {
   }
 }
 
+query getCartItemCountUsingCartApi($cartId: ID!) {
+  cart(id: $cartId) {
+    totalQuantity
+  }
+}
+
 mutation createCart($input: CheckoutCreateInput!) {
   checkoutCreate(input: $input) {
     checkout {
@@ -74,11 +120,37 @@ mutation createCart($input: CheckoutCreateInput!) {
   }
 }
 
+mutation createCartUsingCartApi($input: CartInput!) {
+  cartCreate(input: $input) {
+    cart {
+      id
+      createdAt
+      updatedAt
+    }
+  }
+}
+
 mutation addCartItem($checkoutId: ID!, $lineItem: CheckoutLineItemInput!) {
   checkoutLineItemsAdd(checkoutId: $checkoutId, lineItems: [$lineItem]) {
     checkout {
       webUrl
       id
+    }
+  }
+}
+
+mutation addCartItemUsingCartApi($cartId: ID!, $lineItem: CartLineInput!) {
+  cartLinesAdd(cartId: $cartId, lines: [$lineItem]) {
+    cart {
+      id
+      lines(first: 250) {
+        edges {
+          node {
+            id
+            quantity
+          }
+        }
+      }
     }
   }
 }
@@ -101,9 +173,36 @@ mutation updateCartItem(
   }
 }
 
+mutation updateCartItemUsingCartApi(
+  $cartId: ID!
+  $lineItem: CartLineUpdateInput!
+) {
+  cartLinesUpdate(cartId: $cartId, lines: [$lineItem]) {
+    cart {
+      id
+      lines(first: 250) {
+        edges {
+          node {
+            id
+            quantity
+          }
+        }
+      }
+    }
+  }
+}
+
 mutation removeCartItem($checkoutId: ID!, $lineItemId: ID!) {
   checkoutLineItemsRemove(checkoutId: $checkoutId, lineItemIds: [$lineItemId]) {
     checkout {
+      id
+    }
+  }
+}
+
+mutation removeCartItemUsingCartApi($cartId: ID!, $lineItemId: ID!) {
+  cartLinesRemove(cartId: $cartId, lineIds: [$lineItemId]) {
+    cart {
       id
     }
   }

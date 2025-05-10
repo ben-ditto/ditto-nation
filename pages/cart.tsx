@@ -21,13 +21,20 @@ import Loader from "components/UI/Loader";
 
 import {
   useGetCartQuery,
+  useGetCartUsingCartApiQuery,
   GetCartQuery,
+  GetCartUsingCartApiQuery,
   GetCartQueryVariables,
+  GetCartUsingCartApiQueryVariables,
   GetCartItemCountQuery,
+  GetCartItemCountUsingCartApiQuery,
   CheckoutLineItem,
   useRemoveCartItemMutation,
+  useRemoveCartItemUsingCartApiMutation,
   RemoveCartItemMutation,
+  RemoveCartItemUsingCartApiMutation,
   RemoveCartItemMutationVariables,
+  RemoveCartItemUsingCartApiMutationVariables,
 } from "src/generated/graphql";
 
 const CartPage = (context?: NextPageContext) => {
