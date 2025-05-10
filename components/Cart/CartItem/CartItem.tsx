@@ -8,15 +8,21 @@ import nookies from "nookies";
 import { formatPrice } from "lib/shopify/usePrice";
 
 import {
-  useGetCartQuery,
-  useGetCartItemCountQuery,
-  CheckoutLineItem,
-  useRemoveCartItemMutation,
-  RemoveCartItemMutation,
-  RemoveCartItemMutationVariables,
-  useUpdateCartItemMutation,
-  UpdateCartItemMutation,
-  UpdateCartItemMutationVariables,
+  useGetCartUsingCartApiQuery,
+  GetCartUsingCartApiQuery,
+  GetCartUsingCartApiQueryVariables,
+  useGetCartItemCountUsingCartApiQuery,
+  GetCartItemCountUsingCartApiQuery,
+  GetCartItemCountUsingCartApiQueryVariables,
+  useRemoveCartItemUsingCartApiMutation,
+  RemoveCartItemUsingCartApiMutation,
+  RemoveCartItemUsingCartApiMutationVariables,
+  useUpdateCartItemUsingCartApiMutation,
+  UpdateCartItemUsingCartApiMutation,
+  UpdateCartItemUsingCartApiMutationVariables,
+  CartLine,
+  BaseCartLineEdge,
+  CartLineUpdateInput,
 } from "src/generated/graphql";
 
 import { useQueryClient } from "@tanstack/react-query";
@@ -30,8 +36,8 @@ import { Cross } from "components/Icons";
 import Adder from "components/UI/Adder";
 
 interface IProps {
-  item: CheckoutLineItem;
-  checkoutId: string;
+  item: CartLine;
+  cartId: string;
 }
 
 type ItemOption = {
@@ -41,84 +47,77 @@ type ItemOption = {
   valueId: number;
 };
 
-export const CartItem: React.FC<IProps> = ({ item, checkoutId }) => {
-  const [removing, setRemoving] = useState(false);
+export const CartItem: React.FC<IProps> = ({ item, cartId }) => {
+  const [isRemoving, setIsRemoving] = useState(false);
   const [quantity, setQuantity] = useState<number>(item.quantity);
 
   const queryClient = useQueryClient();
 
   function refetchCart() {
     queryClient.invalidateQueries(
-      useGetCartQuery.getKey({ checkoutId: checkoutId })
+      useGetCartUsingCartApiQuery.getKey({ cartId: cartId })
     );
     queryClient.invalidateQueries(
-      useGetCartItemCountQuery.getKey({ checkoutId: checkoutId })
+      useGetCartItemCountUsingCartApiQuery.getKey({ cartId: cartId })
     );
   }
 
   const {
-    mutate,
-    isLoading,
+    isLoading: removing,
     error,
     mutateAsync: removeCartItemAsync,
-  } = useRemoveCartItemMutation<RemoveCartItemMutation, Error>(
-    shopifyGraphqlRequestClient,
-    {
-      onSuccess: refetchCart,
-      onError: () => {
-        console.error(error);
-      },
-    }
-  );
+  } = useRemoveCartItemUsingCartApiMutation<
+    RemoveCartItemUsingCartApiMutation,
+    Error
+  >(shopifyGraphqlRequestClient, {
+    onSuccess: refetchCart,
+    onError: () => console.error(error),
+  });
 
   const {
     isLoading: updating,
     error: updateError,
     mutateAsync: updateCartItemAsync,
-  } = useUpdateCartItemMutation<UpdateCartItemMutation, Error>(
-    shopifyGraphqlRequestClient,
-    {
-      onSuccess: () => {
-        console.log("success updating");
-        refetchCart();
-      },
-      onError: () => {
-        setQuantity(item.quantity);
-      },
-    }
-  );
+  } = useUpdateCartItemUsingCartApiMutation<
+    UpdateCartItemUsingCartApiMutation,
+    Error
+  >(shopifyGraphqlRequestClient, {
+    onSuccess: refetchCart,
+    onError: () => setQuantity(item.quantity),
+  });
 
   const handleRemove = async () => {
-    setRemoving(true);
+    setIsRemoving(true);
     try {
       await removeCartItemAsync({
-        checkoutId: checkoutId,
+        cartId: cartId,
         lineItemId: item.id,
       });
     } catch (error) {
-      setRemoving(false);
+      setIsRemoving(false);
     }
   };
 
-  const handleUpdate = async (quantity: number) => {
-    try {
-      await updateCartItemAsync({
-        checkoutId: checkoutId,
-        lineItem: { quantity: 3 },
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const handleUpdate = async (quantity: number) => {
+  //   try {
+  //     await updateCartItemAsync({
+  //       cartId: cartId,
+  //       lines: item,
+  //       quantity: quantity,
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   useDebounce(
     () => {
       if (item.quantity !== quantity) {
-        handleUpdate(quantity);
+        // handleUpdate(quantity);
       }
     },
     2000,
-    [quantity, item.quantity]
+    [quantity]
   );
 
   return (
@@ -129,32 +128,34 @@ export const CartItem: React.FC<IProps> = ({ item, checkoutId }) => {
     >
       <div className="flex flex-row items-center space-x-4 py-4">
         <div className="w-16 h-16 relative overflow-hidden cursor-pointer z-0">
-          <Link href={`/shop/${item.variant.product.handle}`}>
+          <Link href={`/shop/${item.merchandise.product.handle}`}>
             <a>
               <Image
                 className={s.productImage}
                 width={150}
                 height={150}
-                src={item.variant.image.url}
-                alt={item.variant.image!.altText}
+                src={item.merchandise.image.url}
+                alt={item.merchandise.image!.altText}
                 unoptimized
               />
             </a>
           </Link>
         </div>
         <div className="flex-1 flex flex-col text-base">
-          <Link href={`/shop/${item.variant.product.handle}`}>
+          <Link href={`/shop/${item.merchandise.product.handle}`}>
             <a>
-              <span className={s.productName}>{item.title}</span>
+              <span className={s.productName}>
+                {item.merchandise.product.title}
+              </span>
             </a>
           </Link>
           <span className="text-sm font-normal tracking-wider">
             x{item.quantity}
           </span>
-          {item.variant.selectedOptions &&
-            item.variant.selectedOptions.length > 0 && (
+          {item.merchandise.selectedOptions &&
+            item.merchandise.selectedOptions.length > 0 && (
               <div className="flex items-center pb-1">
-                {item.variant.selectedOptions.map(
+                {item.merchandise.selectedOptions.map(
                   (option: ItemOption, i: number) => (
                     <div
                       key={`${item.id}-${option.name}`}
@@ -173,7 +174,7 @@ export const CartItem: React.FC<IProps> = ({ item, checkoutId }) => {
                           {option.value}
                         </span>
                       )}
-                      {i === item.variant.selectedOptions.length - 1 ? (
+                      {i === item.merchandise.selectedOptions.length - 1 ? (
                         ""
                       ) : (
                         <span className="mr-3" />
@@ -183,15 +184,15 @@ export const CartItem: React.FC<IProps> = ({ item, checkoutId }) => {
                 )}
               </div>
             )}
-          {item.variant.title === "display" && (
+          {item.merchandise.title === "display" && (
             <div className="text-sm tracking-wider">{quantity}x</div>
           )}
         </div>
         <div className="flex flex-col justify-between space-y-2 text-sm">
           <span>
             {formatPrice({
-              amount: item.variant.priceV2.amount * item.quantity,
-              currencyCode: item.variant.priceV2.currencyCode,
+              amount: item.merchandise.priceV2.amount * item.quantity,
+              currencyCode: item.merchandise.priceV2.currencyCode,
             })}
           </span>
         </div>

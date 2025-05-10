@@ -8674,10 +8674,11 @@ export type GetCartUsingCartApiQueryVariables = Exact<{
 export type GetCartUsingCartApiQuery = {
   __typename?: "QueryRoot";
   cart?: {
-    __typename?: "Cart";
+    __typename: "Cart";
     id: string;
     createdAt: any;
     updatedAt: any;
+    checkoutUrl: any;
     lines: {
       __typename?: "BaseCartLineConnection";
       edges: Array<{
@@ -8691,7 +8692,11 @@ export type GetCartUsingCartApiQuery = {
                 __typename?: "ProductVariant";
                 id: string;
                 title: string;
-                product: { __typename?: "Product"; handle: string };
+                product: {
+                  __typename?: "Product";
+                  handle: string;
+                  title: string;
+                };
                 priceV2: {
                   __typename?: "MoneyV2";
                   amount: any;
@@ -8712,7 +8717,11 @@ export type GetCartUsingCartApiQuery = {
                 __typename?: "ProductVariant";
                 id: string;
                 title: string;
-                product: { __typename?: "Product"; handle: string };
+                product: {
+                  __typename?: "Product";
+                  handle: string;
+                  title: string;
+                };
                 priceV2: {
                   __typename?: "MoneyV2";
                   amount: any;
@@ -8790,7 +8799,7 @@ export type GetCartItemCountUsingCartApiQueryVariables = Exact<{
 
 export type GetCartItemCountUsingCartApiQuery = {
   __typename?: "QueryRoot";
-  cart?: { __typename?: "Cart"; totalQuantity: number } | null;
+  cart?: { __typename: "Cart"; totalQuantity: number } | null;
 };
 
 export type CreateCartMutationVariables = Exact<{
@@ -8890,7 +8899,7 @@ export type UpdateCartItemMutation = {
 
 export type UpdateCartItemUsingCartApiMutationVariables = Exact<{
   cartId: Scalars["ID"];
-  lineItem: CartLineUpdateInput;
+  lines: Array<CartLineUpdateInput> | CartLineUpdateInput;
 }>;
 
 export type UpdateCartItemUsingCartApiMutation = {
@@ -8900,16 +8909,31 @@ export type UpdateCartItemUsingCartApiMutation = {
     cart?: {
       __typename?: "Cart";
       id: string;
+      checkoutUrl: any;
       lines: {
         __typename?: "BaseCartLineConnection";
         edges: Array<{
           __typename?: "BaseCartLineEdge";
           node:
-            | { __typename?: "CartLine"; id: string; quantity: number }
+            | {
+                __typename?: "CartLine";
+                id: string;
+                quantity: number;
+                merchandise: {
+                  __typename?: "ProductVariant";
+                  id: string;
+                  title: string;
+                };
+              }
             | {
                 __typename?: "ComponentizableCartLine";
                 id: string;
                 quantity: number;
+                merchandise: {
+                  __typename?: "ProductVariant";
+                  id: string;
+                  title: string;
+                };
               };
         }>;
       };
@@ -9566,9 +9590,11 @@ useGetCartQuery.fetcher = (
 export const GetCartUsingCartApiDocument = `
     query getCartUsingCartApi($cartId: ID!) {
   cart(id: $cartId) {
+    __typename
     id
     createdAt
     updatedAt
+    checkoutUrl
     lines(first: 250) {
       edges {
         node {
@@ -9580,6 +9606,7 @@ export const GetCartUsingCartApiDocument = `
               title
               product {
                 handle
+                title
               }
               priceV2 {
                 amount
@@ -9736,6 +9763,7 @@ useGetCartItemCountQuery.fetcher = (
 export const GetCartItemCountUsingCartApiDocument = `
     query getCartItemCountUsingCartApi($cartId: ID!) {
   cart(id: $cartId) {
+    __typename
     totalQuantity
   }
 }
@@ -10061,15 +10089,22 @@ useUpdateCartItemMutation.fetcher = (
     headers
   );
 export const UpdateCartItemUsingCartApiDocument = `
-    mutation updateCartItemUsingCartApi($cartId: ID!, $lineItem: CartLineUpdateInput!) {
-  cartLinesUpdate(cartId: $cartId, lines: [$lineItem]) {
+    mutation updateCartItemUsingCartApi($cartId: ID!, $lines: [CartLineUpdateInput!]!) {
+  cartLinesUpdate(cartId: $cartId, lines: $lines) {
     cart {
       id
-      lines(first: 250) {
+      checkoutUrl
+      lines(first: 10) {
         edges {
           node {
             id
             quantity
+            merchandise {
+              ... on ProductVariant {
+                id
+                title
+              }
+            }
           }
         }
       }

@@ -89,7 +89,7 @@ const ProductSingle: React.FC<IProps> = ({ product, context }) => {
     Error
   >(shopifyGraphqlRequestClient, {
     onSuccess: (data, _variables, _context) => {
-      const cartId = nookies.get(context).CART_ID;
+      const { CART_ID: cartId } = parseCookies();
       queryClient.invalidateQueries(
         useAddCartItemUsingCartApiMutation.getKey()
       );
@@ -104,12 +104,11 @@ const ProductSingle: React.FC<IProps> = ({ product, context }) => {
 
   const addItemToCart = async (lineItem: CartLineInput) => {
     try {
-      const cartId = nookies.get(context).CART_ID;
-      const cookies = parseCookies();
-      console.log(cookies.CHECKOUT_ID, cartId);
+      const { CART_ID: cartId } = parseCookies();
+      console.log(cartId);
 
       await mutateCartItemUsingCartApiAsync({
-        cartId: nookies.get(context).CART_ID,
+        cartId,
         lineItem,
       });
       // await ShopifyService.addCartItem({ checkoutId, lineItem });
@@ -128,8 +127,9 @@ const ProductSingle: React.FC<IProps> = ({ product, context }) => {
 
       // newCheckoutId = checkoutCreate?.checkout?.id;
 
-      nookies.set(context, "CART_ID", cartCreate.cart?.id!, {
+      nookies.set(null, "CART_ID", cartCreate.cart?.id!, {
         maxAge: 30 * 24 * 60 * 60,
+        path: "/",
       });
 
       queryClient.invalidateQueries(

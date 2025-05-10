@@ -52,9 +52,11 @@ query getCart($checkoutId: ID!) {
 
 query getCartUsingCartApi($cartId: ID!) {
   cart(id: $cartId) {
+    __typename
     id
     createdAt
     updatedAt
+    checkoutUrl
     lines(first: 250) {
       edges {
         node {
@@ -66,6 +68,7 @@ query getCartUsingCartApi($cartId: ID!) {
               title
               product {
                 handle
+                title
               }
               priceV2 {
                 amount
@@ -107,6 +110,7 @@ query getCartItemCount($checkoutId: ID!) {
 
 query getCartItemCountUsingCartApi($cartId: ID!) {
   cart(id: $cartId) {
+    __typename
     totalQuantity
   }
 }
@@ -176,16 +180,23 @@ mutation updateCartItem(
 
 mutation updateCartItemUsingCartApi(
   $cartId: ID!
-  $lineItem: CartLineUpdateInput!
+  $lines: [CartLineUpdateInput!]!
 ) {
-  cartLinesUpdate(cartId: $cartId, lines: [$lineItem]) {
+  cartLinesUpdate(cartId: $cartId, lines: $lines) {
     cart {
       id
-      lines(first: 250) {
+      checkoutUrl
+      lines(first: 10) {
         edges {
           node {
             id
             quantity
+            merchandise {
+              ... on ProductVariant {
+                id
+                title
+              }
+            }
           }
         }
       }

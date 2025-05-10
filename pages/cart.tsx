@@ -20,35 +20,27 @@ import Button from "components/UI/Button";
 import Loader from "components/UI/Loader";
 
 import {
-  useGetCartQuery,
   useGetCartUsingCartApiQuery,
-  GetCartQuery,
   GetCartUsingCartApiQuery,
-  GetCartQueryVariables,
   GetCartUsingCartApiQueryVariables,
-  GetCartItemCountQuery,
-  GetCartItemCountUsingCartApiQuery,
-  CheckoutLineItem,
-  useRemoveCartItemMutation,
   useRemoveCartItemUsingCartApiMutation,
-  RemoveCartItemMutation,
   RemoveCartItemUsingCartApiMutation,
-  RemoveCartItemMutationVariables,
   RemoveCartItemUsingCartApiMutationVariables,
+  CartLine,
 } from "src/generated/graphql";
 
 const CartPage = (context?: NextPageContext) => {
-  const CHECKOUT_ID = "CHECKOUT_ID";
+  const CART_ID = "CART_ID";
 
   const cookies = parseCookies();
 
-  const checkoutId = cookies.CHECKOUT_ID;
+  const cartId = cookies.CART_ID;
 
-  const { data, isLoading, error, isSuccess } = useGetCartQuery<
-    GetCartQuery,
+  const { data, isLoading, error, isSuccess } = useGetCartUsingCartApiQuery<
+    GetCartUsingCartApiQuery,
     Error
   >(shopifyGraphqlRequestClient, {
-    checkoutId: checkoutId,
+    cartId: cartId,
   });
 
   const emptyMessage = (
@@ -67,16 +59,16 @@ const CartPage = (context?: NextPageContext) => {
   );
 
   useEffect(() => {
-    if (data?.node?.__typename === "Checkout") {
-      if (data?.node?.completedAt) {
+    if (data?.cart?.__typename === "Cart") {
+      if (data?.cart?.updatedAt) {
         console.log("destroy");
-        destroyCookie(context, CHECKOUT_ID);
+        destroyCookie(context, CART_ID);
       }
     }
     //@ts-ignore
-  }, [data?.node?.completedAt, context]);
+  }, [data?.cart?.updatedAt, data?.cart?.__typename, context]);
 
-  if (!checkoutId) {
+  if (!cartId) {
     return emptyMessage;
   }
 
@@ -102,8 +94,8 @@ const CartPage = (context?: NextPageContext) => {
     );
 
   if (data) {
-    if (data?.node?.__typename === "Checkout") {
-      if (data?.node?.lineItems?.nodes.length <= 0) {
+    if (data.cart?.__typename === "Cart") {
+      if (data?.cart?.lines?.edges.length <= 0) {
         return emptyMessage;
       } else {
         if (isSuccess) {
@@ -117,41 +109,32 @@ const CartPage = (context?: NextPageContext) => {
                 {/* <Text variant="pageHeading">My Cart</Text>
           <Text variant="sectionHeading">Review your Order</Text> */}
                 <ul className="py-6 space-y-6 sm:py-0 sm:space-y-0 sm:divide-y sm:divide-accent-2 border-b border-accent-2">
-                  {
-                    // @ts-ignore
-                    data.node.lineItems.nodes.map((item: CheckoutLineItem) => (
-                      <CartItem
-                        key={item.id}
-                        item={item}
-                        checkoutId={checkoutId}
-                      />
-                    ))
-                  }
+                  {data.cart.lines.edges.map((item) => (
+                    <CartItem
+                      key={item.node.id}
+                      item={item.node as CartLine}
+                      cartId={cartId}
+                    />
+                  ))}
                 </ul>
-                {
-                  //@ts-ignore
-                  data?.node?.lineItems?.nodes.length <= 0 ? (
-                    <Button
-                      href="/"
-                      Component="a"
-                      className="rounded-md py-3 w-full md:w-auto"
-                    >
-                      Continue Shopping
-                    </Button>
-                  ) : (
-                    <Button
-                      href={
-                        //@ts-ignore
-                        data?.node?.webUrl
-                      }
-                      Component="a"
-                      openSeperate
-                      className="rounded-md py-3 md:px-2 md:mt-4 w-full md:w-auto"
-                    >
-                      Proceed to Checkout
-                    </Button>
-                  )
-                }
+                {data?.cart?.lines?.edges.length <= 0 ? (
+                  <Button
+                    href="/"
+                    Component="a"
+                    className="rounded-md py-3 w-full md:w-auto"
+                  >
+                    Continue Shopping
+                  </Button>
+                ) : (
+                  <Button
+                    href={data?.cart?.checkoutUrl}
+                    Component="a"
+                    openSeperate
+                    className="rounded-md py-3 md:px-2 md:mt-4 w-full md:w-auto"
+                  >
+                    Proceed to Checkout
+                  </Button>
+                )}
               </div>
             </>
           );

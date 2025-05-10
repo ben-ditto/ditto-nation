@@ -74,7 +74,7 @@ export const useAddItem = async (
   try {
     const cookies = parseCookies();
 
-    const checkoutId = cookies.CHECKOUT_ID;
+    const checkoutId = cookies.CART_ID;
     await mutateCartItemAsync({ checkoutId: checkoutId, lineItem: lineItem });
     // await ShopifyService.addCartItem({ checkoutId, lineItem });
   } catch (error) {

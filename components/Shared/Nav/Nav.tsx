@@ -14,6 +14,8 @@ import { shopifyGraphqlRequestClient } from "src/lib/clients/graphqlRequestClien
 import {
   useGetCartItemCountQuery,
   GetCartItemCountQuery,
+  useGetCartItemCountUsingCartApiQuery,
+  GetCartItemCountUsingCartApiQuery,
 } from "src/generated/graphql";
 
 //Components
@@ -37,21 +39,22 @@ const links = [
 const Navigation: React.FC<IProps> = () => {
   const isDesktop = useMedia();
 
-  const CHECKOUT_ID = "CHECKOUT_ID";
+  const CART_ID = "CART_ID";
 
   const cookies = parseCookies();
 
-  const checkoutId = cookies.CHECKOUT_ID;
+  const cartId = cookies.CART_ID;
 
-  const { data, isLoading, error, isSuccess } = useGetCartItemCountQuery<
-    GetCartItemCountQuery,
-    Error
-  >(shopifyGraphqlRequestClient, {
-    checkoutId: checkoutId,
-  });
+  const { data, isLoading, error, isSuccess } =
+    useGetCartItemCountUsingCartApiQuery<
+      GetCartItemCountUsingCartApiQuery,
+      Error
+    >(shopifyGraphqlRequestClient, {
+      cartId: cartId,
+    });
 
-  if (data?.node?.__typename === "Checkout") {
-    console.log("data", data?.node?.lineItems?.edges?.length);
+  if (data?.cart.__typename === "Cart") {
+    console.log("data", data?.cart?.totalQuantity);
   }
 
   //Router
@@ -123,8 +126,8 @@ const Navigation: React.FC<IProps> = () => {
           <Link href={`/cart`}>
             <a>
               <Bag width={22} height={22} />
-              {data?.node?.__typename === "Checkout" &&
-                data?.node?.lineItems?.edges?.length > 0 && (
+              {data?.cart.__typename === "Cart" &&
+                data?.cart.totalQuantity > 0 && (
                   <div className="rounded-full bg-pink w-3 h-3 absolute -top-1/2 -right-1/2 translate-y-1/2 -translate-x-1/2" />
                 )}
             </a>
