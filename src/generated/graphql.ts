@@ -8816,6 +8816,7 @@ export type CreateCartUsingCartApiMutation = {
     cart?: {
       __typename?: "Cart";
       id: string;
+      checkoutUrl: any;
       createdAt: any;
       updatedAt: any;
     } | null;
@@ -9855,6 +9856,7 @@ export const CreateCartUsingCartApiDocument = `
   cartCreate(input: $input) {
     cart {
       id
+      checkoutUrl
       createdAt
       updatedAt
     }

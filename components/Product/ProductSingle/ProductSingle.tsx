@@ -5,15 +5,30 @@ import type { NextPageContext } from "next";
 
 import {
   CheckoutLineItemInput,
+  CartLineInput,
   useAddCartItemMutation,
+  useAddCartItemUsingCartApiMutation,
   AddCartItemMutation,
+  AddCartItemUsingCartApiMutation,
   AddCartItemMutationVariables,
+  AddCartItemUsingCartApiMutationVariables,
   useCreateCartMutation,
+  useCreateCartUsingCartApiMutation,
   CreateCartMutation,
+  CreateCartUsingCartApiMutation,
   CreateCartMutationVariables,
+  CreateCartUsingCartApiMutationVariables,
   Product,
   useGetCartItemCountQuery,
+  useGetCartItemCountUsingCartApiQuery,
   useGetCartQuery,
+  useGetCartUsingCartApiQuery,
+  GetCartItemCountQuery,
+  GetCartItemCountUsingCartApiQuery,
+  GetCartQuery,
+  GetCartUsingCartApiQuery,
+  GetCartQueryVariables,
+  GetCartUsingCartApiQueryVariables,
 } from "src/generated/graphql";
 
 import nookies, { parseCookies } from "nookies";
@@ -42,97 +57,102 @@ const ProductSingle: React.FC<IProps> = ({ product, context }) => {
 
   // Create Cart
   const {
-    mutateAsync: mutateCreateCartAsync,
-    isLoading: createCartLoading,
-    isError: cartError,
-  } = useCreateCartMutation<CreateCartMutation, Error>(
+    mutateAsync: mutateCreateCartUsingCartApiAsync,
+    isLoading: createCartUsingCartApiLoading,
+    isError: createCartApiError,
+  } = useCreateCartUsingCartApiMutation<CreateCartUsingCartApiMutation, Error>(
     shopifyGraphqlRequestClient,
     {
-      onSuccess: (
-        data: AddCartItemMutation,
-        _variables: CreateCartMutationVariables,
-        _context: unknown
-      ) => {
-        // queryClient.invalidateQueries(useCreateCartMutation.getKey());
-        queryClient.invalidateQueries(useAddCartItemMutation.getKey());
-        queryClient.invalidateQueries(useGetCartItemCountQuery.getKey(null));
+      onSuccess: (data, _variables, _context) => {
+        const cartId = data.cartCreate.cart?.id!;
+        queryClient.invalidateQueries(
+          useAddCartItemUsingCartApiMutation.getKey()
+        );
+        queryClient.invalidateQueries(
+          useGetCartItemCountUsingCartApiQuery.getKey({ cartId })
+        );
       },
       onError: () => {
-        console.log(error);
+        console.error(createCartApiError);
       },
     }
   );
 
-  const CHECKOUT_ID = "CHECKOUT_ID";
+  const CART_ID = "CART_ID";
 
   const {
-    mutate,
-    isLoading,
-    error,
-    isError,
-    mutateAsync: mutateCartItemAsync,
-  } = useAddCartItemMutation<AddCartItemMutation, Error>(
-    shopifyGraphqlRequestClient,
-    {
-      onSuccess: (
-        data: AddCartItemMutation,
-        _variables: AddCartItemMutationVariables,
-        _context: unknown
-      ) => {
-        const checkoutId = nookies.get(context).CHECKOUT_ID;
-        const cookies = parseCookies();
-        console.log(cookies.CHECKOUT_ID, checkoutId);
-        queryClient.invalidateQueries(useAddCartItemMutation.getKey());
-        queryClient.invalidateQueries(
-          useGetCartItemCountQuery.getKey({ checkoutId: checkoutId })
-        );
-        // console.log("product mutation data", data);
-      },
-      onError: () => {
-        console.error(error);
-      },
-    }
-  );
+    mutateAsync: mutateCartItemUsingCartApiAsync,
+    isLoading: addCartApiLoading,
+    isError: addCartApiError,
+  } = useAddCartItemUsingCartApiMutation<
+    AddCartItemUsingCartApiMutation,
+    Error
+  >(shopifyGraphqlRequestClient, {
+    onSuccess: (data, _variables, _context) => {
+      const cartId = nookies.get(context).CART_ID;
+      queryClient.invalidateQueries(
+        useAddCartItemUsingCartApiMutation.getKey()
+      );
+      queryClient.invalidateQueries(
+        useGetCartItemCountUsingCartApiQuery.getKey({ cartId })
+      );
+    },
+    onError: () => {
+      console.error(addCartApiError);
+    },
+  });
 
-  const addItemToCart = async (lineItem: CheckoutLineItemInput) => {
+  const addItemToCart = async (lineItem: CartLineInput) => {
     try {
-      const checkoutId = nookies.get(context).CHECKOUT_ID;
+      const cartId = nookies.get(context).CART_ID;
       const cookies = parseCookies();
-      console.log(cookies.CHECKOUT_ID, checkoutId);
+      console.log(cookies.CHECKOUT_ID, cartId);
 
-      await mutateCartItemAsync({ checkoutId: checkoutId, lineItem: lineItem });
+      await mutateCartItemUsingCartApiAsync({
+        cartId: nookies.get(context).CART_ID,
+        lineItem,
+      });
       // await ShopifyService.addCartItem({ checkoutId, lineItem });
       // console.log("worked, checkoutid:", checkoutId);
     } catch (error) {
-      const { checkoutCreate } = await mutateCreateCartAsync({
-        input: { lineItems: [lineItem] },
+      const { cartCreate } = await mutateCreateCartUsingCartApiAsync({
+        input: {
+          lines: [
+            {
+              quantity: lineItem.quantity,
+              merchandiseId: lineItem.merchandiseId,
+            },
+          ],
+        },
       });
 
       // newCheckoutId = checkoutCreate?.checkout?.id;
 
-      nookies.set(context, CHECKOUT_ID, checkoutCreate?.checkout?.id!, {
+      nookies.set(context, "CART_ID", cartCreate.cart?.id!, {
         maxAge: 30 * 24 * 60 * 60,
       });
 
-      queryClient.invalidateQueries(useAddCartItemMutation.getKey());
       queryClient.invalidateQueries(
-        useGetCartItemCountQuery.getKey({
-          checkoutId: checkoutCreate?.checkout?.id,
+        useAddCartItemUsingCartApiMutation.getKey()
+      );
+      queryClient.invalidateQueries(
+        useGetCartItemCountUsingCartApiQuery.getKey({
+          cartId: cartCreate.cart?.id,
         })
       );
       console.log("error");
     }
   };
 
-  const buyNow = async (lineItem: CheckoutLineItemInput) => {
+  const buyNow = async (lineItem: CartLineInput) => {
     try {
-      const { checkoutCreate } = await mutateCreateCartAsync({
-        input: { lineItems: [lineItem] },
+      const { cartCreate } = await mutateCreateCartUsingCartApiAsync({
+        input: { lines: [lineItem] },
       });
 
       // console.log("weburl", checkoutCreate.checkout.webUrl);
 
-      window.open(checkoutCreate.checkout.webUrl, "_self").focus();
+      window.open(cartCreate.cart.checkoutUrl, "_self").focus();
     } catch (error) {
       console.log("error");
     }
@@ -161,10 +181,10 @@ const ProductSingle: React.FC<IProps> = ({ product, context }) => {
           onClick={async () => {
             await addItemToCart({
               quantity: quantity,
-              variantId: product?.variants?.nodes[0]?.id,
+              merchandiseId: product?.variants?.nodes[0]?.id,
             });
           }}
-          loading={isLoading}
+          loading={addCartApiLoading}
           disabled={product?.availableForSale === false}
           className="rounded-md py-3 md:max-w-xs hover:bg-accent-2"
         >
@@ -176,7 +196,7 @@ const ProductSingle: React.FC<IProps> = ({ product, context }) => {
             onClick={async () => {
               await buyNow({
                 quantity: 1,
-                variantId: product?.variants?.nodes[0]?.id,
+                merchandiseId: product?.variants?.nodes[0]?.id,
               });
             }}
             // loading={createCartLoading && !isLoading}
@@ -186,7 +206,7 @@ const ProductSingle: React.FC<IProps> = ({ product, context }) => {
           </Button>
         )}
 
-        {isError && cartError && (
+        {addCartApiError && (
           <span className="text-pink pt-3">Error adding item to cart</span>
         )}
 

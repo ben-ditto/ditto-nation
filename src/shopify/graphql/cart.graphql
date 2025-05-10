@@ -124,6 +124,7 @@ mutation createCartUsingCartApi($input: CartInput!) {
   cartCreate(input: $input) {
     cart {
       id
+      checkoutUrl
       createdAt
       updatedAt
     }
