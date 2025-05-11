@@ -59,14 +59,11 @@ const CartPage = (context?: NextPageContext) => {
   );
 
   useEffect(() => {
-    if (data?.cart?.__typename === "Cart") {
-      if (data?.cart?.updatedAt) {
-        console.log("destroy");
-        destroyCookie(context, CART_ID);
-      }
+    // When the cart has been completed or deleted, the API returns null for data.cart
+    if (data && data.cart === null) {
+      destroyCookie(context, CART_ID);
     }
-    //@ts-ignore
-  }, [data?.cart?.updatedAt, data?.cart?.__typename, context]);
+  }, [data, context]);
 
   if (!cartId) {
     return emptyMessage;
