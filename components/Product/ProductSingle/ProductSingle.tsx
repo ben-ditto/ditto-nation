@@ -211,11 +211,11 @@ const ProductSingle: React.FC<IProps> = ({ product, context }) => {
           </Button>
         )}
 
-        {addCartApiError && cartId !== null && (
+        {/* {addCartApiError && cartId !== null && (
           <span className="text-pink pt-3 animate-fade-in">
             Error adding item to cart
           </span>
-        )}
+        )} */}
 
         <div
           className="mt-3"
