@@ -216,6 +216,7 @@ const ProductSingle: React.FC<IProps> = ({ product, context }) => {
             Error adding item to cart
           </span>
         )} */}
+        {/* l */}
 
         <div
           className="mt-3"
