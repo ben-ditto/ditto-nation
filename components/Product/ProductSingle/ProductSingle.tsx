@@ -80,10 +80,14 @@ const ProductSingle: React.FC<IProps> = ({ product, context }) => {
 
   const CART_ID = "CART_ID";
 
+  const { CART_ID: cartId } = parseCookies();
+
   const {
     mutateAsync: mutateCartItemUsingCartApiAsync,
     isLoading: addCartApiLoading,
     isError: addCartApiError,
+    error,
+    reset: resetAddCartError,
   } = useAddCartItemUsingCartApiMutation<
     AddCartItemUsingCartApiMutation,
     Error
@@ -104,7 +108,6 @@ const ProductSingle: React.FC<IProps> = ({ product, context }) => {
 
   const addItemToCart = async (lineItem: CartLineInput) => {
     try {
-      const { CART_ID: cartId } = parseCookies();
       console.log(cartId);
 
       await mutateCartItemUsingCartApiAsync({
@@ -140,6 +143,8 @@ const ProductSingle: React.FC<IProps> = ({ product, context }) => {
           cartId: cartCreate.cart?.id,
         })
       );
+      // Clear any previous add-to-cart error now that a cart was created
+      resetAddCartError();
       console.log("error");
     }
   };
@@ -206,7 +211,7 @@ const ProductSingle: React.FC<IProps> = ({ product, context }) => {
           </Button>
         )}
 
-        {addCartApiError && (
+        {addCartApiError && cartId !== null && (
           <span className="text-pink pt-3">Error adding item to cart</span>
         )}
 
