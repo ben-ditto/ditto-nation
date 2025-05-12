@@ -53,9 +53,9 @@ const Navigation: React.FC<IProps> = () => {
       cartId: cartId,
     });
 
-  if (data?.cart.__typename === "Cart") {
-    console.log("data", data?.cart?.totalQuantity);
-  }
+  // if (data?.cart?.__typename === "Cart") {
+  //   console.log("data", data?.cart?.totalQuantity);
+  // }
 
   //Router
   const router = useRouter();
@@ -126,10 +126,9 @@ const Navigation: React.FC<IProps> = () => {
           <Link href={`/cart`}>
             <a>
               <Bag width={22} height={22} />
-              {data?.cart.__typename === "Cart" &&
-                data?.cart.totalQuantity > 0 && (
-                  <div className="rounded-full bg-pink w-3 h-3 absolute -top-1/2 -right-1/2 translate-y-1/2 -translate-x-1/2" />
-                )}
+              {data?.cart && data?.cart.totalQuantity > 0 && (
+                <div className="rounded-full bg-pink w-3 h-3 absolute -top-1/2 -right-1/2 translate-y-1/2 -translate-x-1/2" />
+              )}
             </a>
           </Link>
         </div>

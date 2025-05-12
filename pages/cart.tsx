@@ -91,7 +91,7 @@ const CartPage = (context?: NextPageContext) => {
     );
 
   if (data) {
-    if (data.cart?.__typename === "Cart") {
+    if (data.cart) {
       if (data?.cart?.lines?.edges.length <= 0) {
         return emptyMessage;
       } else {
