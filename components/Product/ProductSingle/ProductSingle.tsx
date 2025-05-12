@@ -212,7 +212,9 @@ const ProductSingle: React.FC<IProps> = ({ product, context }) => {
         )}
 
         {addCartApiError && cartId !== null && (
-          <span className="text-pink pt-3">Error adding item to cart</span>
+          <span className="text-pink pt-3 animate-fade-in">
+            Error adding item to cart
+          </span>
         )}
 
         <div
